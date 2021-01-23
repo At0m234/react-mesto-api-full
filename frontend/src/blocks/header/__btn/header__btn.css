@@ -1,0 +1,15 @@
+.header__btn {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100;
+  background-color: #000;
+  color: #fff;
+  border-width: 0;
+  outline: none;
+}
+
+.header__btn:hover {
+  transition: .1s linear .05s;
+  opacity: .6;
+  cursor: pointer;
+}

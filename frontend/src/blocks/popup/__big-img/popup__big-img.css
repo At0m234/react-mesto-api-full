@@ -1,0 +1,7 @@
+.popup__big-img {
+  display: flex;
+  max-width: 75vw;
+  max-height: 75vh;
+  height: auto;
+  width: auto;
+}

@@ -1,0 +1,10 @@
+.entry__title {
+  width: 100%;
+  height: auto;
+  margin: 10px auto 50px auto;
+  color: #fff;
+  font-family: Inter;
+  font-style: normal;
+  font-size: 24px;
+  text-align: center;
+}

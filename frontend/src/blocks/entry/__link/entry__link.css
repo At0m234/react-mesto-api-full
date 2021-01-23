@@ -1,0 +1,15 @@
+.entry__link {
+  margin-left: 5px;
+  border: none;
+  text-decoration: none;
+}
+
+.entry__link:hover {
+  transition: .1s linear .05s;
+  opacity: .6;
+  cursor: pointer;
+}
+
+.entry__link:visited{
+  color: white;
+}

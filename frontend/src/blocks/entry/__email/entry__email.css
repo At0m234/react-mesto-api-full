@@ -1,0 +1,10 @@
+.entry__email {
+  width: 100%;
+  height: auto;
+  margin: 0 auto 30px auto;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 13px;
+}

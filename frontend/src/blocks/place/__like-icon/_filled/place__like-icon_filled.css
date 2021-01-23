@@ -1,0 +1,9 @@
+.place__like-icon_filled {
+  background-image: url(../../../../images/Vector.svg);
+}
+
+.place__like-icon_filled:hover {
+  transition: .05s ease-in .01s;
+  opacity: .3;
+  cursor: pointer;
+}

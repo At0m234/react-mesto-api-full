@@ -1,0 +1,16 @@
+@import url(__title/entry__title.css);
+@import url(__email/entry__email.css);
+@import url(__password/entry__password.css);
+@import url(__submit/entry__submit.css);
+@import url(__sign-in/entry__sign-in.css);
+@import url(__link/entry__link.css);
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #000;
+  width: 358px;
+  height: auto;
+  margin: 60px auto 0 auto;
+}

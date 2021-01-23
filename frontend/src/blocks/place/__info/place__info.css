@@ -1,0 +1,9 @@
+.place__info {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 241px 41px;
+  grid-template-rows: 27% 27% 23% 23%;
+  background-color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

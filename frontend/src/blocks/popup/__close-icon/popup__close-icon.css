@@ -1,0 +1,39 @@
+@import url(_img/popup__close-icon_img.css);
+
+.popup__close-icon {
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  transform: translate(224px, -32px);
+  position: absolute;
+  background-image: url(../../../images/close-icon.svg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.popup__close-icon:hover {
+  transition: .1s ease-in .1s;
+  opacity: .6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 470px) {
+  .popup__close-icon {
+    width: 30px;
+    height: 30px;
+    transform: translate(135px, -20px);
+  }
+}
+
+.popup__close-icon_img {
+  align-self: flex-end;
+  transform: translate(36px, -35px);
+}
+
+@media screen and (max-width: 470px) {
+  .popup__close-icon_img {
+    transform: translate(28px, -27px);
+  }
+}

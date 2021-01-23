@@ -1,0 +1,16 @@
+@import url(__image/place__image.css);
+@import url(__info/place__info.css);
+@import url(__name/place__name.css);
+@import url(__like-icon/place__like-icon.css);
+@import url(./__like-icon/_filled/place__like-icon_filled.css);
+@import url(__like-counter/place__like-counter.css);
+@import url(__trash/place__trash.css);
+@import url(__trash/_invisible/place__trash_invisible.css);
+
+.place {
+  position: relative;
+  display: grid;
+  grid-template-columns: fit-content(282px);
+  grid-template-rows: repeat(2, fit-content(282px));
+  text-transform: capitalize;
+}

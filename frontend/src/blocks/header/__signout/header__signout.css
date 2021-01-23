@@ -1,0 +1,6 @@
+.header__signout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: auto;
+}

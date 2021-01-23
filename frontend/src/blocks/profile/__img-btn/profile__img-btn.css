@@ -1,0 +1,13 @@
+.profile__img-btn {
+  padding: 0;
+  width: 26px;
+  height: 26px;
+  border-width: 0;
+  background-color: transparent;
+  background-image: url(../../../images/editAvatarBtn.svg);
+  visibility: hidden;
+}
+
+.profile__img-btn:hover {
+  cursor: pointer;
+}

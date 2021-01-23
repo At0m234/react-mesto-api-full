@@ -1,0 +1,10 @@
+.popup__close-icon_img {
+  align-self: flex-end;
+  transform: translate(-190px, -5px);
+}
+
+@media screen and (max-width: 470px) {
+  .popup__close-icon_img {
+    transform: translate(-120px, -3px);
+  }
+}

@@ -1,0 +1,19 @@
+.entry__submit {
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  color: #000;
+  align-self: flex-end;
+  text-align: center;
+  font-family: Inter;
+  font-style: normal;
+  border: none;
+  margin: 216px auto 15px auto;
+  border-radius: 2px;
+}
+
+.entry__submit:hover {
+  transition: .1s linear .1s;
+  background-color: rgba(49, 49, 49, 0.8);
+  cursor: pointer;
+}

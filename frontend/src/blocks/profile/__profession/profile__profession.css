@@ -1,0 +1,24 @@
+.profile__profession {
+  word-break: break-all;
+  max-width: 334px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  color: #fff;
+  margin: 0 0 25px 0;
+  align-items: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__profession {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__profession {
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0 35px 0;
+  }
+}

@@ -1,0 +1,33 @@
+@import url(__logo/header__logo.css);
+@import url(__signout/header__signout.css);
+@import url(__username/header__username.css);
+@import url(__btn/header__btn.css);
+
+.header {
+  max-width: 882px;
+  border-bottom: 1px solid #545454;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto 40px auto;
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+
+@media screen and (max-width: 1023px) {
+  .header {
+    width: 90%;
+    max-width: 600px;
+    padding-top: 40px;
+    padding-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    width: 100%;
+    max-width: 320px;
+    padding-top: 28px;
+    padding-bottom: 0;
+  }
+}
