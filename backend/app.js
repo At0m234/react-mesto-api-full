@@ -29,7 +29,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-const whitelist = ['http://localhost:3000'];
+const whitelist = ['http://localhost:3000', 'http://localhost:3001'];
 
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
