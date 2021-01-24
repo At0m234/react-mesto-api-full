@@ -14,7 +14,7 @@ const users = require('./routes/users');
 const cards = require('./routes/cards');
 const NotFoundError = require('./errors/not-found-err');
 // Слушаем 3000 порт
-const { PORT = 3001, BASE__PATH = 'http://localhost:3001/' } = process.env;
+const { PORT = 3000, BASE__PATH = 'http://localhost:3000/' } = process.env;
 
 const app = express();
 
