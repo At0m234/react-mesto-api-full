@@ -1,4 +1,4 @@
-export const BASE__URL = 'http://178.154.229.38:3000/';
+export const BASE__URL = 'http://178.154.229.38:3000';
 
 export const register = (email, password) => {
   return fetch(`${BASE__URL}/signup`, {
