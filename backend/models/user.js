@@ -11,12 +11,14 @@ const userSchema = mongoose.Schema({
     minlength: 2, // минимальная длина имени — 2 символа
     maxlength: 30, // а максимальная — 30 символов
     default: 'Жак-Ив Кусто',
+    new: true,
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
     default: 'Исследователь',
+    new: true,
   },
   avatar: {
     type: String,
@@ -28,6 +30,7 @@ const userSchema = mongoose.Schema({
       message: 'Ссылка не соответсвует требованиям валидации', // когда validator вернёт false, будет использовано это сообщение
     },
     default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
+    new: true,
   },
   email: {
     type: String,

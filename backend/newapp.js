@@ -12,6 +12,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const users = require('./routes/users');
 // импортируем роутер карточек
 const cards = require('./routes/cards');
+const NotFoundError = require('./errors/not-found-err');
 // Слушаем 3000 порт
 const { PORT = 3000, BASE__PATH = 'http://localhost:3000/' } = process.env;
 
@@ -52,14 +53,17 @@ app.use(requestLogger); // подключаем логгер запросов
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required().min(8).pattern(new RegExp('[A-Za-zА-Яа-яЁё -]{1,}')),
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
+    avatar: Joi.string().pattern(new RegExp(/^http[s]{0,1}:\/\/[-._~:/?#[\]@!$&'()*+,;= 0-=a-zA-Z-]*/gm)),
   }).unknown(true),
 }), createUser);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required().min(8).pattern(new RegExp('[A-Za-zА-Яа-яЁё -]{1,}')),
   }),
 }), login);
 
@@ -71,9 +75,8 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use('*', (req, res) => {
-  const ERROR_CODE = 404;
-  res.status(ERROR_CODE).send({ message: 'Запрашиваемый ресурс не найден' });
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
