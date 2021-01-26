@@ -49,7 +49,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 // };
 function CORS(req, res, next) {
   res.header('Access-Control-Allow-Origin', ['http://MIC.students.nomoredomains.icu', 'https://MIC.students.nomoredomains.icu', 'http://localhost:3000']);
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Headers', 'DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 
   next();
