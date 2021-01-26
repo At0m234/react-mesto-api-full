@@ -4,20 +4,13 @@ export const register = (email, password) => {
   return fetch(`${BASE__URL}/signup`, {
     method: 'POST',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      "password": password,
-      "email": email
-    })
+    body: JSON.stringify({email, password})
   })
   .then((res) => {
     return res.json()
-  })
-  .then((data) => {
-    localStorage.setItem('password', '12345')
-    localStorage.setItem('email', 'v.o.ilin@yandex.ru')
-    return data
   })
   .catch((err) => {
     console.log(err)
@@ -31,10 +24,7 @@ export const authorize = (email, password ) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify( {
-      "email": email,
-      "password": password, 
-    })
+    body: JSON.stringify( { email, password })
   })
   .then((res) => {
     return res.json()
@@ -48,12 +38,11 @@ export const authorize = (email, password ) => {
   })
 }
 
-export const getContent = () => {
-  let token = localStorage.getItem('jwt')
-  if (localStorage.getItem('jwt'))
-  {return fetch (`${BASE__URL}/users/me`, {
+export const getContent = (token) => {
+  return fetch (`${BASE__URL}/users/me`, {
     method: 'GET',
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
     }
@@ -61,8 +50,8 @@ export const getContent = () => {
     .then((res)=> {return res.json()})
     .then(data => {
       return data.data
-    
-  })} else {
-    console.log("Token не найден")
-    }
+  })
+    .catch((err) => {
+      console.log("err")
+    })
 }

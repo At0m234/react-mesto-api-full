@@ -14,7 +14,7 @@ const users = require('./routes/users');
 const cards = require('./routes/cards');
 const NotFoundError = require('./errors/not-found-err');
 // Слушаем 3000 порт
-const { PORT = 3000, BASE__PATH = 'http://localhost:3000/' } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
@@ -32,17 +32,15 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 const whitelist = [
   'http://localhost:3000',
   'http://MIC.students.nomoredomains.icu',
-  'http://api.MIC.students.nomoredomains.icu',
   'https://MIC.students.nomoredomains.icu',
-  'https://api.MIC.students.nomoredomains.icu',
 ];
 
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
   if (whitelist.indexOf(req.header('Origin')) !== -1) {
     corsOptions = {
-      origin: true,
       credentials: true,
+      origin: true,
     }; // reflect (enable) the requested origin in the CORS response
   } else {
     corsOptions = { origin: false }; // disable CORS for this request
