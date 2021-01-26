@@ -47,14 +47,14 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 //   }
 //   callback(null, corsOptions); // callback expects two parameters: error and options
 // };
-function CORS(req, res, next) {
-  res.header('Access-Control-Allow-Origin', ['http://MIC.students.nomoredomains.icu', 'https://MIC.students.nomoredomains.icu', 'http://localhost:3000']);
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+// function CORS(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', ['http://MIC.students.nomoredomains.icu', 'https://MIC.students.nomoredomains.icu', 'http://localhost:3000']);
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 
-  next();
-}
-app.use(CORS);
+//   next();
+// }
+app.use(cors());
 
 app.use(requestLogger); // подключаем логгер запросов
 
