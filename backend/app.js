@@ -32,7 +32,9 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 const whitelist = [
   'http://localhost:3000',
   'http://MIC.students.nomoredomains.icu',
+  'http://api.MIC.students.nomoredomains.icu',
   'https://MIC.students.nomoredomains.icu',
+  'https://api.MIC.students.nomoredomains.icu',
 ];
 
 const corsOptionsDelegate = function (req, callback) {

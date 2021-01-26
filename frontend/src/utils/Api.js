@@ -105,5 +105,5 @@ class Api {
   }
 }
 
-let myApi = new Api({url:'http://mic.students.nomoredomains.icu/', token:localStorage.getItem('token')});
+let myApi = new Api({url:'http://api.mic.students.nomoredomains.icu/', token:localStorage.getItem('token')});
 export default myApi;
