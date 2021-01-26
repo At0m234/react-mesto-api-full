@@ -3,10 +3,10 @@ export const BASE__URL = 'http://api.mic.students.nomoredomains.icu';
 export const register = (email, password) => {
   return fetch(`${BASE__URL}/signup`, {
     method: 'POST',
-    // headers: {
-    //   'Accept': 'application/json',
-    //   'Content-Type': 'application/json',
-    // },
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({email, password})
   })
   .then((res) => {
@@ -20,10 +20,10 @@ export const register = (email, password) => {
 export const authorize = (email, password ) => {
   return fetch (`${BASE__URL}/signin`, {
     method: 'POST',
-    // headers: {
-    //   'Accept': 'application/json',
-    //   'Content-Type': 'application/json',
-    // },
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify( { email, password })
   })
   .then((res) => {
