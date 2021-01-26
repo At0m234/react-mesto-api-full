@@ -1,4 +1,3 @@
-export const token = localStorage.getItem('token');
 class Api {
   constructor({url, token}) {
     this._url = url;
@@ -106,5 +105,5 @@ class Api {
   }
 }
 
-let myApi = new Api({url:'http://api.MIC.students.nomoredomains.icu/', token:token});
+let myApi = new Api({url:'http://mic.students.nomoredomains.icu/', token:localStorage.getItem('token')});
 export default myApi;
