@@ -1,3 +1,4 @@
+export const token = localStorage.getItem('token');
 class Api {
   constructor({url, token}) {
     this._url = url;
@@ -105,5 +106,5 @@ class Api {
   }
 }
 
-let myApi = new Api({url:'http://178.154.229.38:3001/', token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDBkOTA5OWFjNTVmNTIyYWIxMjA1OTciLCJpYXQiOjE2MTE1MDE3NzIsImV4cCI6MTYxMjEwNjU3Mn0.d-8Ouyyg3_8M_Ov15BB0K9JBpx274eH192F2fn-Ihfw'});
+let myApi = new Api({url:'http://api.MIC.students.nomoredomains.icu/', token:token});
 export default myApi;
