@@ -5,7 +5,7 @@ import '../index.css';
 import { Header } from "./Header"
 import { Main } from "./Main.js"
 import { Footer } from "./Footer.js"
-import myApi from '../utils/Api';
+import { Api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 import { EditProfilePopup } from './EditProfilePopup'
 import { EditAvatarPopup } from './EditAvatarPopup'
@@ -17,6 +17,7 @@ import { Login } from "./Login";
 import { Register } from "./Register";
 import * as cardsAuth from '../utils/cardsAuth.js'
 import { InfoTooltip } from './InfoTooltip';
+import { BASE_URL } from '../utils/constants';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
@@ -32,7 +33,10 @@ function App() {
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false)
   const [message, setMessage] = useState('');
   const [userLocalData, setUserLocalData] = useState({email: "", password: ""});
-  
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  const myApi = new Api({
+    'url': BASE_URL, 'token': token
+  })
   const ESC_KEYCODE = 27;
   const history = useHistory();
 
@@ -245,7 +249,8 @@ function App() {
               <Register setInfoTooltipOpen={setInfoTooltipOpen} setMessage={setMessage}/>
             </Route>
             <Route exact path="/signin">
-              <Login setUserLocalData={setUserLocalData} setInfoTooltipOpen={setInfoTooltipOpen} handleLogin={handleLogin} tokenCheck={tokenCheck} setMessage={setMessage}/>
+              <Login setToken={setToken}
+              setUserLocalData={setUserLocalData} setInfoTooltipOpen={setInfoTooltipOpen} handleLogin={handleLogin} tokenCheck={tokenCheck} setMessage={setMessage}/>
             </Route>
             <Route>
               {isLogged ? <Redirect to="/" /> : <Redirect to="/signin" />}

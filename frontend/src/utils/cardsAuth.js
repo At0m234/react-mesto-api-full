@@ -1,4 +1,4 @@
-export const BASE__URL = 'http://api.mic.students.nomoredomains.icu';
+export const BASE__URL = 'https://api.pic.students.nomoredomains.icu';
 
 export const register = (email, password) => {
   return fetch(`${BASE__URL}/signup`, {

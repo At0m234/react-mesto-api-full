@@ -31,3 +31,5 @@ export const configObj = {
   inputErrorClass: 'popup__text_type_error',
   errorClass: 'popup__input_error_active',
 };
+
+export const BASE_URL = 'https://api.pic.students.nomoredomains.icu';

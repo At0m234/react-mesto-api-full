@@ -22,8 +22,10 @@ export const Login = (props) => {
     .then((data) => {
       if(!data) {
         props.setMessage('Что-то пошло не так! Попробуйте ещё раз.')
+        return 
       }
         props.setUserLocalData({'email':username,'password': password})
+        props.setToken(data.jwt)
         props.tokenCheck()
     })
     .catch((err) => {
