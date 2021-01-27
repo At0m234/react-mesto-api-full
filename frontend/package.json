@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r build/* at0m@178.154.254.55:/home/at0m/react-mesto-api-full/react-mesto-api-full/news-frontend"
+    "deploy": "npm run build && scp -r /build/* atom@178.154.254.80:/home/atom/react-mesto-api-full/news-frontend"
   },
   "eslintConfig": {
     "extends": "react-app"
