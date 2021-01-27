@@ -189,6 +189,7 @@ function App() {
   function getData() {
     myApi.getCards()
       .then((res)=> {
+        console.log("res " + res.json())
         setCards(res)
       })
       .catch(err => console.log(err));

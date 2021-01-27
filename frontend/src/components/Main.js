@@ -28,16 +28,17 @@ export function Main (props) {
         <button className="profile__add-btn" onClick={props.onAddPlace} type="button" aria-label="Добавить"></button>
       </section>
       <section className="places">
-        {props.cards.map((card) => (
-          <Card 
-          key={card._id}
-          onSelectCard={props.onSelectCard}
-          onSelectCurrentCard={props.onSelectCurrentCard}
-          card={card}
-          onCardLike = {props.onCardLike}
-          onCardDelete = {props.onDelete}
-          />
-        ))}
+      {props.cards && props.cards.map((card) => (
+              <Card 
+              key={card._id}
+              onSelectCard={props.onSelectCard}
+              onSelectCurrentCard={props.onSelectCurrentCard}
+              card={card}
+              onCardLike = {props.onCardLike}
+              onCardDelete = {props.onDelete}
+              />
+            ))
+          }
       </section>
     </main>
   )

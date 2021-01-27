@@ -39,7 +39,9 @@ export const authorize = (email, password ) => {
 }
 
 export const getContent = (token) => {
-  return fetch (`${BASE__URL}/users/me`, {
+  if (localStorage.getItem('jwt'))
+  {
+    return fetch (`${BASE__URL}/users/me`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -50,8 +52,12 @@ export const getContent = (token) => {
     .then((res)=> {return res.json()})
     .then(data => {
       return data.user
-  })
-    .catch((err) => {
-      console.log("err")
     })
+    .catch((err) => {
+      console.log(err)
+    })
+  } else {
+    console.log("Token не найден")
+  }
+    
 }
