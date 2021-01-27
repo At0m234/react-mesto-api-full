@@ -34,9 +34,9 @@ function App() {
   const [message, setMessage] = useState('');
   const [userLocalData, setUserLocalData] = useState({email: "", password: ""});
   const [token, setToken] = useState(localStorage.getItem('token'))
-  const myApi = new Api({
+  const [myApi, setMyApi] = useState(new Api({
     'url': BASE_URL, 'token': token
-  })
+  }))
   const ESC_KEYCODE = 27;
   const history = useHistory();
 
@@ -52,9 +52,9 @@ function App() {
 
   const tokenCheck = () => {
     if(localStorage.getItem('jwt')) {
-      let jwt = localStorage.getItem('jwt')
-      cardsAuth.getContent()
+      cardsAuth.getContent(localStorage.getItem('jwt'))
         .then((res) => {
+          console.log(res)
         if (res){
           if (res.email) {
             if (res.email === userLocalData.email)
@@ -249,7 +249,7 @@ function App() {
               <Register setInfoTooltipOpen={setInfoTooltipOpen} setMessage={setMessage}/>
             </Route>
             <Route exact path="/signin">
-              <Login setToken={setToken}
+              <Login setToken={setMyApi}
               setUserLocalData={setUserLocalData} setInfoTooltipOpen={setInfoTooltipOpen} handleLogin={handleLogin} tokenCheck={tokenCheck} setMessage={setMessage}/>
             </Route>
             <Route>

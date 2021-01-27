@@ -7,6 +7,10 @@ export class Api {
       'Content-Type': 'application/json',
     }
   }
+
+  changeToken(token){
+    this._token = token;
+  }
   // Приватный метод проверки ответа сервера и преобразование из json
   _getResponseData(additionalUrl, optionsObj) {
     return fetch(this._url + additionalUrl, optionsObj)

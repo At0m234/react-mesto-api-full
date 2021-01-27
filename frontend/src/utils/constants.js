@@ -8,4 +8,4 @@ export const configObj = {
   errorClass: 'popup__input_error_active',
 };
 
-export const BASE_URL = 'https://api.pic.students.nomoredomains.icu';
+export const BASE_URL = 'http://api.pic.students.nomoredomains.icu';

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as cardsAuth from '../utils/cardsAuth.js'
-
+import {BASE_URL} from '../utils/constants.js'
+import {Api} from '../utils/Api.js'
 export const Login = (props) => {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
@@ -25,7 +26,9 @@ export const Login = (props) => {
         return 
       }
         props.setUserLocalData({'email':username,'password': password})
-        props.setToken(data.jwt)
+        props.setToken(new Api({'url':BASE_URL, 'token':data.jwt}))
+        localStorage.setItem('jwt', data.jwt)
+        console.log(data.jwt)
         props.tokenCheck()
     })
     .catch((err) => {

@@ -1,4 +1,4 @@
-export const BASE__URL = 'https://api.pic.students.nomoredomains.icu';
+export const BASE__URL = 'http://api.pic.students.nomoredomains.icu';
 
 export const register = (email, password) => {
   return fetch(`${BASE__URL}/signup`, {
@@ -44,12 +44,12 @@ export const getContent = (token) => {
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
+      "token": `Bearer ${token}`
     }
   })
     .then((res)=> {return res.json()})
     .then(data => {
-      return data.data
+      return data.user
   })
     .catch((err) => {
       console.log("err")
