@@ -115,6 +115,4 @@ app.listen(PORT, () => {
   // Если всё работает, консоль покажет, какой порт приложение слушает
   // eslint-disable-next-line no-console
   console.log(`App listening on port ${PORT}`);
-  // eslint-disable-next-line no-console
-  console.log(`Link to the server ${BASE__PATH}`);
 });
