@@ -18,9 +18,8 @@ export function Card(props) {
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = (
-    "place__trash " + `${props.card.owner._id === currentUser._id ? ' ' : ' place__trash_invisible'}`
+    "place__trash " + `${props.card.owner[0] === currentUser._id ? ' ' : ' place__trash_invisible'}`
   ); 
-
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
   const isLiked = props.card.likes.some(i => i._id === currentUser._id);
 

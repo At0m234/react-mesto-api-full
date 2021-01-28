@@ -4,8 +4,8 @@ import {BASE_URL} from '../utils/constants.js';
 import {Api} from '../utils/Api.js';
 
 export const Login = (props) => {
-  const [username,setUsername] = useState('11111111@mail.ru');
-  const [password,setPassword] = useState('aaaa1111');
+  const [username,setUsername] = useState('');
+  const [password,setPassword] = useState('');
 
   function handleUsernameChange(e) {
     setUsername(e.target.value)
@@ -28,6 +28,7 @@ export const Login = (props) => {
       }
         props.setUserLocalData({'email':username,'password': password})
         props.setMyApi(new Api({'url':BASE_URL, 'token':data.jwt}))
+        localStorage.setItem('apiData', JSON.stringify({'url':BASE_URL, 'token':data.jwt}))
         localStorage.setItem('jwt', data.jwt)
         props.tokenCheck()
     })

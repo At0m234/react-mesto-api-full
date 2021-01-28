@@ -26,14 +26,14 @@ function App() {
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState(null)
   const [isSuggestionOpen, setSuggestionOpen] = useState(false)
-  const [currentUser, setCurrentUser] = useState({ 'name':'', 'profession':'', 'id': '' ,'avatar': ""});
+  const [currentUser, setCurrentUser] = useState({ 'name':'', 'profession':'', '_id': '' ,'avatar': ""});
   const [cards, setCards] = useState([])
   const [isLogged, setLogged] = useState(false)
   const [userData, setUserData] = useState({email: "", password: ""})
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false)
   const [message, setMessage] = useState('');
   const [userLocalData, setUserLocalData] = useState({email: "", password: ""});
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState(localStorage.getItem('jwt'))
   const [myApi, setMyApi] = useState(new Api({
     'url': BASE_URL, 'token': token
   }))
@@ -60,8 +60,7 @@ function App() {
     if(localStorage.getItem('jwt')) {
       cardsAuth.getContent(localStorage.getItem('jwt'))
         .then((res) => {
-          console.log(res)
-        if (res){
+        if (res) {
           if (res.email) {
             if (res.email === userLocalData.email)
             {
@@ -70,7 +69,7 @@ function App() {
                 email: res.email,
                 _id: res._id
               })
-              setCurrentUser({ 'name':res.name, 'profession':res.about, 'avatar': res.avatar })
+              setCurrentUser({ 'name':res.name, 'profession':res.about, '_id': res._id, 'avatar': res.avatar })
               handleLogin()
               history.push('/')
             }
@@ -96,12 +95,13 @@ function App() {
   function handleDeleteClick(card){
     myApi.getCards()
       .then((res)=> {
-        setCards(res)
-        const isOwner = card.owner._id === currentUser._id;
+        if (res)
+        setCards(res.cards)
+        const isOwner = card.owner[0] === currentUser._id;
         if (isOwner) {
           myApi.removeCard(card._id);
-          setCards(cards.filter(i=>i._id !== card._id)
-        )};
+          setCards(cards.filter(i=>i._id !== card._id))
+        };
       })
       .catch(err => console.log(err));
   }
@@ -110,7 +110,8 @@ function App() {
     myApi.addNewCard(obj).then(res=> {  
       myApi.getCards()
         .then((res)=> {
-          setCards(res)
+          if (res)
+          setCards(res.cards)
         })
         .catch(err => console.log(err));
     closeAllPopups();
@@ -129,14 +130,22 @@ function App() {
   }
 
   useEffect(()=> {
-    setLogged(localStorage.getItem("isLogged"))
-    setCurrentUser(JSON.parse(localStorage.getItem("CurrentUser")))
-    setUserData(JSON.parse(localStorage.getItem("UserData")))
-    myApi.getUserInfo()
-      .then(res=> {
-        setCurrentUser(res)
-      })
-      .catch(e=>{console.log(e)})
+    if (localStorage.getItem("isLogged") !== null) setLogged(localStorage.getItem("isLogged"))
+    if (localStorage.getItem("CurrentUser") !== null){
+      setCurrentUser(JSON.parse(localStorage.getItem("CurrentUser")))
+    } 
+    if (localStorage.getItem("UserData") !== null) setUserData(JSON.parse(localStorage.getItem("UserData")))
+    setToken(localStorage.getItem('jwt'))
+    setMyApi(new Api({
+      'url': BASE_URL, 'token': localStorage.getItem('jwt')
+    }))
+    myApi.getCards()
+      .then((res)=> {
+        if (res)
+        setCards(res.cards)
+      }
+      )
+      .catch(err => console.log(err));
   },[])
 
   function handleDeleteButton() {
@@ -200,9 +209,8 @@ function App() {
   function getData() {
     myApi.getCards()
       .then((res)=> {
-        if (res)
-        console.log("res " + res.json())
-        setCards(res) 
+        if (res !== null)
+        {setCards(res.cards) }
       })
       .catch(err => console.log(err));
 

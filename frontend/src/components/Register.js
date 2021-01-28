@@ -21,7 +21,6 @@ export function Register(props) {
         if (res.statusCode !== 400){
           props.setMessage('Вы успешно зарегистрировались!')
           props.setInfoTooltipOpen(true)
-          props.onRegister(true)
         } else {
           props.setMessage('Что-то пошло не так! Попробуйте ещё раз.')
           props.setInfoTooltipOpen(true)

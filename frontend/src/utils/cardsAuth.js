@@ -59,5 +59,4 @@ export const getContent = (token) => {
   } else {
     console.log("Token не найден")
   }
-    
 }

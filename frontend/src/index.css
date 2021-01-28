@@ -14,3 +14,4 @@
 @import url('blocks/popup/__save/_disabled/popup__save_disabled.css');
 @import url('blocks/popup/__text/_type/_error/popup__text_type_error.css');
 @import url('blocks/entry/entry.css');
+@import url('blocks/popup/__infoTooltip/popup__infoTooltip.css');
