@@ -33,10 +33,6 @@ app.use(cors());
 
 app.use(requestLogger); // подключаем логгер запросов
 
-app.get('*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
-});
-
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
@@ -69,6 +65,10 @@ app.use(auth);
 app.use('/cards', cards);
 
 app.use('/users', users);
+
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+});
 
 app.use(errorLogger); // подключаем логгер ошибок
 
