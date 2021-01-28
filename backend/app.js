@@ -29,31 +29,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-// const whitelist = [
-//   'http://localhost:3000',
-//   'http://MIC.students.nomoredomains.icu',
-//   'https://MIC.students.nomoredomains.icu',
-// ];
-
-// const corsOptionsDelegate = function (req, callback) {
-//   let corsOptions;
-//   if (whitelist.indexOf(req.header('Origin')) !== -1) {
-//     corsOptions = {
-//       credentials: true,
-//       origin: true,
-//     }; // reflect (enable) the requested origin in the CORS response
-//   } else {
-//     corsOptions = { origin: false }; // disable CORS for this request
-//   }
-//   callback(null, corsOptions); // callback expects two parameters: error and options
-// };
-// function CORS(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', ['http://MIC.students.nomoredomains.icu', 'https://MIC.students.nomoredomains.icu', 'http://localhost:3000']);
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-
-//   next();
-// }
 app.use(cors());
 
 app.use(requestLogger); // подключаем логгер запросов

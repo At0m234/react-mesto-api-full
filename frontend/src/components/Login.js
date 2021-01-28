@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import * as cardsAuth from '../utils/cardsAuth.js'
-import {BASE_URL} from '../utils/constants.js'
-import {Api} from '../utils/Api.js'
+import * as cardsAuth from '../utils/cardsAuth.js';
+import {BASE_URL} from '../utils/constants.js';
+import {Api} from '../utils/Api.js';
+
 export const Login = (props) => {
-  const [username,setUsername] = useState('');
-  const [password,setPassword] = useState('');
+  const [username,setUsername] = useState('11111111@mail.ru');
+  const [password,setPassword] = useState('aaaa1111');
 
   function handleUsernameChange(e) {
     setUsername(e.target.value)
@@ -26,9 +27,8 @@ export const Login = (props) => {
         return 
       }
         props.setUserLocalData({'email':username,'password': password})
-        props.setToken(new Api({'url':BASE_URL, 'token':data.jwt}))
+        props.setMyApi(new Api({'url':BASE_URL, 'token':data.jwt}))
         localStorage.setItem('jwt', data.jwt)
-        console.log(data.jwt)
         props.tokenCheck()
     })
     .catch((err) => {

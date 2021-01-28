@@ -26,10 +26,10 @@ function App() {
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState(null)
   const [isSuggestionOpen, setSuggestionOpen] = useState(false)
-  const [currentUser, setCurrentUser] = useState({ 'name':'', 'profession':'', 'id': '' });
+  const [currentUser, setCurrentUser] = useState({ 'name':'', 'profession':'', 'id': '' ,'avatar': ""});
   const [cards, setCards] = useState([])
   const [isLogged, setLogged] = useState(false)
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState({email: "", password: ""})
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false)
   const [message, setMessage] = useState('');
   const [userLocalData, setUserLocalData] = useState({email: "", password: ""});
@@ -41,11 +41,17 @@ function App() {
   const history = useHistory();
 
   const handleLogin = () => {
+    localStorage.setItem('isLogged', true)
+    localStorage.setItem("CurrentUser", JSON.stringify(currentUser))
+    localStorage.setItem("UserData", JSON.stringify(userData))
     setLogged(true)
   }
 
   function handleSignOut() {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('isLogged')
+    localStorage.removeItem("CurrentUser")
+    localStorage.removeItem("UserLocalData")
     setLogged(false)
     history.push('/signin')
   }
@@ -64,6 +70,8 @@ function App() {
                 email: res.email,
                 _id: res._id
               })
+              setCurrentUser({ 'name':res.name, 'profession':res.about, 'avatar': res.avatar })
+              handleLogin()
               history.push('/')
             }
           }
@@ -121,6 +129,9 @@ function App() {
   }
 
   useEffect(()=> {
+    setLogged(localStorage.getItem("isLogged"))
+    setCurrentUser(JSON.parse(localStorage.getItem("CurrentUser")))
+    setUserData(JSON.parse(localStorage.getItem("UserData")))
     myApi.getUserInfo()
       .then(res=> {
         setCurrentUser(res)
@@ -189,8 +200,9 @@ function App() {
   function getData() {
     myApi.getCards()
       .then((res)=> {
+        if (res)
         console.log("res " + res.json())
-        setCards(res)
+        setCards(res) 
       })
       .catch(err => console.log(err));
 
@@ -226,10 +238,10 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <div className="page">
-          <Header onSignOut={handleSignOut} userdata={userLocalData}/>
+          <Header onSignOut={handleSignOut} userdata={userData}/>
           <Switch>
             <ProtectedRoute exact path="/" component={Main} 
-              isLogged={isLogged}
+              isLogged={localStorage.getItem("isLogged")}
               isEditAvatarPopupOpen={isEditAvatarPopupOpen}
               isEditProfilePopupOpen={isEditProfilePopupOpen} 
               isAddPlacePopupOpen={isAddPlacePopupOpen}
@@ -249,12 +261,17 @@ function App() {
             <Route exact path="/signup">
               <Register setInfoTooltipOpen={setInfoTooltipOpen} setMessage={setMessage}/>
             </Route>
-            <Route exact path="/signin">
-              <Login setToken={setMyApi}
-              setUserLocalData={setUserLocalData} setInfoTooltipOpen={setInfoTooltipOpen} handleLogin={handleLogin} tokenCheck={tokenCheck} setMessage={setMessage}/>
-            </Route>
+            <ProtectedRoute  component={Login}  exact path="/signin"
+                isLogged={!localStorage.getItem("isLogged")}
+                setMyApi={setMyApi}
+                setUserLocalData={setUserLocalData} 
+                setInfoTooltipOpen={setInfoTooltipOpen} 
+                handleLogin={handleLogin} 
+                tokenCheck={tokenCheck} 
+                setMessage={setMessage}
+            />
             <Route>
-              {isLogged ? <Redirect to="/" /> : <Redirect to="/signin" />}
+              {localStorage.getItem("isLogged") ? <Redirect to="/" /> : <Redirect to="/signin" />}
             </Route>
           </Switch>
           <EditProfilePopup 
@@ -283,7 +300,10 @@ function App() {
             onSubmit={handleDeleteClick}
           >
           </SuggestionPopup>
-          <InfoTooltip infoTooltipOpen={infoTooltipOpen} message={message} closeinfoTooltip={closeinfoTooltip}>
+          <InfoTooltip 
+          infoTooltipOpen={infoTooltipOpen}
+          message={message} 
+          closeinfoTooltip={closeinfoTooltip}>
           </InfoTooltip>
           <ImagePopup 
             chosenCard={selectedCard}

@@ -13,7 +13,7 @@ export class Api {
   }
   // Приватный метод проверки ответа сервера и преобразование из json
   _getResponseData(additionalUrl, optionsObj) {
-    return fetch(this._url + additionalUrl, optionsObj)
+    return fetch(this._url  + additionalUrl, optionsObj)
       .then(res => {
         if (res.ok) {
           return res.json()

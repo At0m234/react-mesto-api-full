@@ -19,7 +19,7 @@ export function EditProfilePopup(props) {
 
   React.useEffect(() => {
     setName(currentUser.name);
-    setDescription(currentUser.about);
+    setDescription(currentUser.profession);
   }, [currentUser]); 
 
   function handleSubmit(e) {

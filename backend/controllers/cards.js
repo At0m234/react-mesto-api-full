@@ -4,9 +4,7 @@ const NoRightsErr = require('../errors/no-rights-err');
 const Card = require('../models/card');
 
 module.exports.createCard = (req, res, next) => {
-  const { name, link } = req.body;
-
-  Card.create({ name, link, owner: req.user._id })
+  Card.create({ name: req.body.name, link: req.body.link, owner: req.body.user._id })
     .then((card) => {
       if (!card) {
         throw new BadRequestError('Произошла ошибка, не удалось создать карточку');
@@ -21,8 +19,9 @@ module.exports.getCards = (req, res, next) => {
     .then((cards) => {
       if (!cards) {
         throw new NotFoundError('Произошла ошибка, не удалось найти карточки');
+      } else {
+        res.send({ cards });
       }
-      res.send({ cards });
     })
     .catch((err) => next(err));
 };
@@ -30,8 +29,6 @@ module.exports.getCards = (req, res, next) => {
 module.exports.removeCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
-      // res.send(card.owner);
-      // res.send(req.user._id);
       if (card === null) {
         throw new NotFoundError('Карточка не найдена');
       } else if (card.owner != req.user._id) {

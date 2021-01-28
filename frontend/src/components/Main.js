@@ -23,7 +23,7 @@ export function Main (props) {
             <h1 className="profile__title">{currentUser.name}</h1>
             <button className="profile__edit-btn" onClick={props.onEditProfile} type="button" aria-label="Редактировать"></button>
           </div>
-          <p className="profile__profession">{currentUser.about}</p>
+          <p className="profile__profession">{currentUser.profession}</p>
         </div>
         <button className="profile__add-btn" onClick={props.onAddPlace} type="button" aria-label="Добавить"></button>
       </section>
