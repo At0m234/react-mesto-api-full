@@ -37,7 +37,7 @@ app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-}); 
+});
 
 // роуты, не требующие авторизации,
 // например, регистрация и логин
@@ -66,7 +66,7 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use('*', (req, res, next) => {
+app.get('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
 
