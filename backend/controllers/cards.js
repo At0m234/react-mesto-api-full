@@ -11,7 +11,7 @@ module.exports.createCard = (req, res, next) => {
       }
       res.send({ card });
     })
-    .catch((err) => next(err));
+    .catch((err) => res.send('BRE'));
 };
 
 module.exports.getCards = (req, res, next) => {
