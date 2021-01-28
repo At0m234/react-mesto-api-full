@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://api.pic.students.nomoredomains.icu';
+export const BASE_URL = 'https://api.pic.students.nomoredomains.icu';
