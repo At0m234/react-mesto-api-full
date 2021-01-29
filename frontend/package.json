@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "b&s":"npm run build && npm run start",
+    "bands":"npm run build && npm run start",
     "deploy": "npm run build && scp -r build/* atom@178.154.254.80:/home/atom/react-mesto-api-full/news-frontend"
   },
   "eslintConfig": {

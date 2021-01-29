@@ -42,7 +42,6 @@ function App() {
 
   const handleLogin = () => {
     localStorage.setItem('isLogged', true)
-    localStorage.setItem("CurrentUser", JSON.stringify(currentUser))
     localStorage.setItem("UserData", JSON.stringify(userData))
     setLogged(true)
   }
@@ -62,23 +61,22 @@ function App() {
         .then((res) => {
         if (res) {
           if (res.email) {
-            if (res.email === userLocalData.email)
-            {
-              setLogged(true)
               setUserData({
                 email: res.email,
                 _id: res._id
               })
               setCurrentUser({ 'name':res.name, 'profession':res.about, '_id': res._id, 'avatar': res.avatar })
+              localStorage.setItem("CurrentUser", JSON.stringify({ 'name':res.name, 'profession':res.about, '_id': res._id, 'avatar': res.avatar }))
               handleLogin()
               history.push('/')
-            }
           }
         } else {
             setMessage('Что-то пошло не так! Попробуйте ещё раз.')
             setInfoTooltipOpen(true)
           }
-  })}}
+        })
+    }
+  }
 
   function handleUpdateUser(obj) {
     const newInfo = currentUser
@@ -130,11 +128,12 @@ function App() {
   }
 
   useEffect(()=> {
-    if (localStorage.getItem("isLogged") !== null) setLogged(localStorage.getItem("isLogged"))
-    if (localStorage.getItem("CurrentUser") !== null){
+    if (localStorage.getItem("isLogged") != null) setLogged(localStorage.getItem("isLogged"))
+    if (localStorage.getItem("CurrentUser") != null){
       setCurrentUser(JSON.parse(localStorage.getItem("CurrentUser")))
     } 
-    if (localStorage.getItem("UserData") !== null) setUserData(JSON.parse(localStorage.getItem("UserData")))
+    if (localStorage.getItem("UserData") != null) setUserData(JSON.parse(localStorage.getItem("UserData")))
+    if (localStorage.getItem("userLocalData") != null) setUserLocalData(JSON.parse(localStorage.getItem("userLocalData")))
     setToken(localStorage.getItem('jwt'))
     setMyApi(new Api({
       'url': BASE_URL, 'token': localStorage.getItem('jwt')

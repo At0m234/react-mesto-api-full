@@ -1,12 +1,22 @@
 // создали роутер
 const router = require('express').Router();
+const { celebrate, Joi } = require('celebrate');
 const { getCards, createCard, removeCard } = require('../controllers/cards');
 
 router.get('/', getCards);
 
-router.post('/', createCard);
+router.post('/', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(1),
+    link: Joi.string().required(),
+  }),
+}), createCard);
 
-router.delete('/:cardId', removeCard);
+router.delete('/:cardId', celebrate({
+  params: Joi.object().keys({
+    cardId: Joi.string().alphanum().required().length(24),
+  }),
+}), removeCard);
 
 // экспортировали роутер
 module.exports = router;
