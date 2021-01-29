@@ -33,24 +33,23 @@ function App() {
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false)
   const [message, setMessage] = useState('');
   const [userLocalData, setUserLocalData] = useState({email: "", password: ""});
-  const [token, setToken] = useState(localStorage.getItem('jwt'))
+  const [token, setToken] = useState("")
   const [myApi, setMyApi] = useState(new Api({
-    'url': BASE_URL, 'token': token
+    'url': BASE_URL, 'token': ""
   }))
   const ESC_KEYCODE = 27;
   const history = useHistory();
 
-  const handleLogin = () => {
-    localStorage.setItem('isLogged', true)
-    localStorage.setItem("UserData", JSON.stringify(userData))
-    setLogged(true)
-  }
+
 
   function handleSignOut() {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('isLogged')
-    localStorage.removeItem("CurrentUser")
-    localStorage.removeItem("UserLocalData")
+    localStorage.clear()
+    setMyApi(new Api({
+      'url': BASE_URL, 'token': ""
+    }))
+    setCurrentUser({ 'name':'', 'profession':'', '_id': '' ,'avatar': ""})
+    setUserLocalData({email: "", password: ""})
+    setToken("")
     setLogged(false)
     history.push('/signin')
   }
@@ -67,7 +66,9 @@ function App() {
               })
               setCurrentUser({ 'name':res.name, 'profession':res.about, '_id': res._id, 'avatar': res.avatar })
               localStorage.setItem("CurrentUser", JSON.stringify({ 'name':res.name, 'profession':res.about, '_id': res._id, 'avatar': res.avatar }))
-              handleLogin()
+              localStorage.setItem('isLogged', true)
+              localStorage.setItem("UserData", JSON.stringify({email: res.email, password: res._id}))
+              setLogged(true)
               history.push('/')
           }
         } else {
@@ -134,18 +135,18 @@ function App() {
     } 
     if (localStorage.getItem("UserData") != null) setUserData(JSON.parse(localStorage.getItem("UserData")))
     if (localStorage.getItem("userLocalData") != null) setUserLocalData(JSON.parse(localStorage.getItem("userLocalData")))
-    setToken(localStorage.getItem('jwt'))
+    if (localStorage.getItem('jwt') != null) setToken(localStorage.getItem('jwt'))
     setMyApi(new Api({
       'url': BASE_URL, 'token': localStorage.getItem('jwt')
     }))
     myApi.getCards()
       .then((res)=> {
         if (res)
-        setCards(res.cards)
+          setCards(res.cards)
       }
       )
       .catch(err => console.log(err));
-  },[])
+  },[token])
 
   function handleDeleteButton() {
     closeAllPopups()
@@ -273,7 +274,6 @@ function App() {
                 setMyApi={setMyApi}
                 setUserLocalData={setUserLocalData} 
                 setInfoTooltipOpen={setInfoTooltipOpen} 
-                handleLogin={handleLogin} 
                 tokenCheck={tokenCheck} 
                 setMessage={setMessage}
             />
