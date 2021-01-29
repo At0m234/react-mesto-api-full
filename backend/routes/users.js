@@ -5,11 +5,7 @@ const { getUsers, getMe } = require('../controllers/users');
 
 router.get('/', getUsers);
 
-router.get('/me', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-  }),
-}), getMe);
+router.get('/me', getMe);
 
 // экспортировали роутер
 module.exports = router;
