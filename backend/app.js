@@ -70,6 +70,10 @@ app.post('/signin', celebrate({
 //   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
 // });
 
+app.all('/*', (req, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+});
+
 // авторизация
 app.use(auth);
 
@@ -77,10 +81,6 @@ app.use(auth);
 app.use('/cards', cards);
 
 app.use('/users', users);
-
-app.all('/*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
-});
 
 app.use(errorLogger); // подключаем логгер ошибок
 
