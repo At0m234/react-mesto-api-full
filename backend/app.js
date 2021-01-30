@@ -66,12 +66,17 @@ app.get('/singin', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
-app.get('/*', () => {
+app.get('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
-app.post('/*', () => {
+app.post('*', () => {
   throw new NotFoundError('Запрашиваемый ресурс не найден');
+});
+
+app.all('*', (req, res, next) => {
+  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+  next();
 });
 
 // авторизация
@@ -90,11 +95,6 @@ app.use(errorLogger); // подключаем логгер ошибок
 
 // обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
-
-app.all('*', (req, res, next) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
-  next();
-});
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
