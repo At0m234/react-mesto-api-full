@@ -51,12 +51,24 @@ app.post('/signup', celebrate({
   }).unknown(true),
 }), createUser);
 
+// app.get('/singup', () => {
+//   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
+// });
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8).pattern(new RegExp('[A-Za-zА-Яа-яЁё -]{1,}')),
   }),
 }), login);
+
+// app.get('/singin', () => {
+//   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
+// });
+
+// app.get('/*', () => {
+//   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
+// });
 
 // авторизация
 app.use(auth);
@@ -66,7 +78,7 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use('*', (req, res, next) => {
+app.all('/*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
 
