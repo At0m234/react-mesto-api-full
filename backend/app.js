@@ -51,33 +51,12 @@ app.post('/signup', celebrate({
   }).unknown(true),
 }), createUser);
 
-app.get('/singup', () => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден');
-});
-
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8).pattern(new RegExp('[A-Za-zА-Яа-яЁё -]{1,}')),
   }),
 }), login);
-
-app.get('/singin', () => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден');
-});
-
-app.get('*', () => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден');
-});
-
-app.post('*', () => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден');
-});
-
-app.all('*', (req, res, next) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
-  next();
-});
 
 // авторизация
 app.use(auth);
@@ -95,6 +74,31 @@ app.use(errorLogger); // подключаем логгер ошибок
 
 // обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
+
+app.get('/singup', (req, res, next) => {
+  res.status(404).send('Something broke!');
+  next();
+});
+
+app.get('/singin', (req, res, next) => {
+  res.status(404).send('Something broke!');
+  next();
+});
+
+app.get('/*', (req, res, next) => {
+  res.status(404).send('Something broke!');
+  next();
+});
+
+app.post('*', (req, res, next) => {
+  res.status(404).send('Something broke!');
+  next();
+});
+
+app.use('*', (req, res, next) => {
+  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+  next();
+});
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
