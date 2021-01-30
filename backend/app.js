@@ -67,7 +67,8 @@ app.use('/cards', cards);
 app.use('/users', users);
 
 app.use('/*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+  res.send("XUY");
+  next();
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
