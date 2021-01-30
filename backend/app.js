@@ -68,7 +68,6 @@ app.use('/users', users);
 
 app.use('/*', (req, res, next) => {
   res.send("XUY");
-  next();
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
