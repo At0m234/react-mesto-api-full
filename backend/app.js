@@ -66,11 +66,17 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.all('*', (err, req, res, next) => {
-  console.log("XUY")
-  res.send("XUY");
-  res.end("!")
+app.use((req, res) => {
+  res
+    .status(404)
+    .send({ message: 'Запрашиваемый ресурс не найден' });
 });
+
+// app.all('*', (err, req, res, next) => {
+//   console.log("XUY")
+//   res.send("XUY");
+//   res.end("!")
+// });
 
 app.use(errorLogger); // подключаем логгер ошибок
 
@@ -108,7 +114,7 @@ app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
   res
-    .status(err.statusCode)
+    .status(statusCode)
     .send({
       // проверяем статус и выставляем сообщение в зависимости от него
       message: statusCode === 500
