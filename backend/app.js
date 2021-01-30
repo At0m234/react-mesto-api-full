@@ -81,7 +81,7 @@ app.use(errors()); // обработчик ошибок celebrate
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
   res
-    .status(err.statusCode === 500 ? err.statusCode : 500)
+    .status(err.statusCode === 500 ? 500 : err.statusCode)
     .send({ message: err.statusCode });
   // вызываем next
   next();
