@@ -7,8 +7,6 @@ import { Main } from "./Main.js"
 import { Footer } from "./Footer.js"
 import { Api } from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
-import { EditProfilePopup } from './EditProfilePopup'
-import { EditAvatarPopup } from './EditAvatarPopup'
 import { ImagePopup } from "./ImagePopup"
 import { AddPlacePopup } from './AddPlacePopup';
 import { SuggestionPopup } from './SuggestionPopup'
@@ -281,18 +279,6 @@ function App() {
               {localStorage.getItem("isLogged") ? <Redirect to="/" /> : <Redirect to="/signin" />}
             </Route>
           </Switch>
-          <EditProfilePopup 
-            isOpen={isEditProfilePopupOpen} 
-            onClose={closeAllPopups} 
-            onUpdateUser = {handleUpdateUser}
-            onSubmit={handleUpdateUser}
-          />
-          <EditAvatarPopup 
-            isOpen={isEditAvatarPopupOpen} 
-            onClose={closeAllPopups} 
-            onUpdateAvatar={handleUpdateAvatar}
-            onSubmit={handleUpdateAvatar}
-          /> 
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen} 
             onClose={closeAllPopups} 

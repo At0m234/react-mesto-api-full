@@ -89,7 +89,7 @@ app.use((err, req, res, next) => {
         : message,
     });
   // вызываем next с аргументом-ошибкой
-  next(new Error('Ошибка авторизации'));
+  next(err);
 });
 
 app.listen(PORT, () => {

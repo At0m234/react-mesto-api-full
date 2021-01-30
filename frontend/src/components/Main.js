@@ -14,14 +14,10 @@ export function Main (props) {
       <section className="profile">
         <div className="profile__img-container">
           <img  className="profile__image" alt="" id="profileImage"style={{ backgroundImage: `url(${currentUser.avatar})` }}/>
-          <div className="profile__img-overlay">
-            <button className="profile__img-btn" onClick={props.onEditAvatar} type="button" aria-label="Редактировать картинку"></button>
-          </div>
         </div>
         <div className="profile__container">
           <div className="profile__button-wrapper">
             <h1 className="profile__title">{currentUser.name}</h1>
-            <button className="profile__edit-btn" onClick={props.onEditProfile} type="button" aria-label="Редактировать"></button>
           </div>
           <p className="profile__profession">{currentUser.profession}</p>
         </div>

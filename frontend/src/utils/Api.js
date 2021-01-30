@@ -8,7 +8,7 @@ export class Api {
     }
   }
 
-  changeToken(token){
+  changeToken(token) {
     this._token = token;
   }
   // Приватный метод проверки ответа сервера и преобразование из json
@@ -32,18 +32,6 @@ export class Api {
     return this._getResponseData('/cards', { headers: this._headers });
   }
 
-  // Метод загрузки новых данных о пользователе на сервер
-  editUserInfo(formData) {
-    return this._getResponseData('/users/me', {
-      method: 'PATCH',
-      headers:  this._headers,
-      body: JSON.stringify({
-        name: formData.name,
-        about: formData.about
-      })
-    })
-  }
-
   // Метод добавления новой карточки на сервер
   addNewCard(formData) {
     return this._getResponseData('/cards', {
@@ -61,49 +49,6 @@ export class Api {
     return this._getResponseData('/cards/' + cardId, {
       method: 'DELETE',
       headers:  this._headers,
-    })
-  }
-
-  // Метод постановки лайка карточке
-  addLike(cardId) {
-    return this._getResponseData('/cards/likes/' + cardId, {
-      method: 'PUT',
-      headers:  this._headers,
-    })
-  }
-
-  // Метод снятия лайка с карточки
-  removeLike(cardId) {
-    return this._getResponseData('/cards/likes/' + cardId, {
-      method: 'DELETE',
-      headers:  this._headers,
-    })
-  }
-
-  // публичный метод постановки / снятия лайков v3
-  changeLikeCardStatus(cardId, isLiked) {
-    return fetch(this._url + '/cards/likes/' + cardId, {
-      method: isLiked ? 'PUT' : 'DELETE',
-      headers: {
-        authorization: this._headers
-      }
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    });
-  }
-
-  // Метод загрузки аватара пользователя
-  changeUserAvatar(url) {
-    return this._getResponseData('/users/me/avatar', {
-      method: 'PATCH',
-      headers:  this._headers,
-      body: JSON.stringify({
-        avatar: url,
-      })
     })
   }
 }
