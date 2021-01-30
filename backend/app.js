@@ -87,20 +87,9 @@ app.use(errorLogger); // подключаем логгер ошибок
 // обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
 
-app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode = 404, message } = err;
-
-  res
-    .status(err.statusCode)
-    .send({
-      // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === 404
-        ? 'Нот фаунд'
-        : message,
-    });
-  // вызываем next с аргументом-ошибкой
-  next(new Error(err));
+app.all('*', (req, res, next) => {
+  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+  next();
 });
 
 // здесь обрабатываем все ошибки
@@ -116,8 +105,8 @@ app.use((err, req, res, next) => {
         ? 'На сервере произошла ошибка'
         : message,
     });
-  // вызываем next с аргументом-ошибкой
-  next(new Error(err));
+  // вызываем next
+  next();
 });
 
 app.listen(PORT, () => {
