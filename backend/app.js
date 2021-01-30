@@ -70,10 +70,6 @@ app.post('/signin', celebrate({
 //   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
 // });
 
-app.all('/*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
-});
-
 // авторизация
 app.use(auth);
 
@@ -82,10 +78,30 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
+app.use('/*', (req, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+});
+
 app.use(errorLogger); // подключаем логгер ошибок
 
 // обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
+
+app.use((err, req, res, next) => {
+  // если у ошибки нет статуса, выставляем 500
+  const { statusCode = 404, message } = err;
+
+  res
+    .status(err.statusCode)
+    .send({
+      // проверяем статус и выставляем сообщение в зависимости от него
+      message: statusCode === 404
+        ? 'Нот фаунд'
+        : message,
+    });
+  // вызываем next с аргументом-ошибкой
+  next(new Error(err));
+});
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
@@ -101,7 +117,7 @@ app.use((err, req, res, next) => {
         : message,
     });
   // вызываем next с аргументом-ошибкой
-  next(err);
+  next(new Error(err));
 });
 
 app.listen(PORT, () => {
