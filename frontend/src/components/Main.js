@@ -6,8 +6,8 @@ export function Main (props) {
   const currentUser = React.useContext(CurrentUserContext)
   
   useEffect(() => {
-    props.getData()
-  },[])
+    props.getCards()
+  },)
 
   return (
     <main className="content">

@@ -38,7 +38,17 @@ function App() {
   const ESC_KEYCODE = 27;
   const history = useHistory();
 
-
+  function getCards(){
+    myApi.getCards()
+    .then((res)=> {
+      if (res)
+        setCards(res.cards)
+    }
+    )
+    .catch((err)=>{
+      console.log(err)
+    });
+  }
 
   function handleSignOut() {
     localStorage.clear()
@@ -114,13 +124,16 @@ function App() {
     setMyApi(new Api({
       'url': BASE_URL, 'token': localStorage.getItem('jwt')
     }))
-    myApi.getCards()
-      .then((res)=> {
-        if (res)
-          setCards(res.cards)
+    
+      function getIt(evt){
+        handleCloseClick(evt)
       }
-      )
-      .catch(err => console.log(err));
+      document.addEventListener("keydown", (evt)=>{
+        if(evt.keyCode === ESC_KEYCODE)getIt(evt)
+      })
+      return ()=>{
+        document.removeEventListener("keydown", (evt)=>{getIt(evt)})
+      }
   },[token])
 
   function handleDeleteButton() {
@@ -150,7 +163,7 @@ function App() {
     setSuggestionOpen(false)
   }
 
-  function getData() {
+  /*function getData() {
     myApi.getCards()
       .then((res)=> {
         if (res !== null)
@@ -162,19 +175,7 @@ function App() {
       .then((res)=>{
       })
       .catch(err => console.log(err));
-  }
-
-  useEffect(() => {
-    function getIt(evt){
-      handleCloseClick(evt)
-    }
-    document.addEventListener("keydown", (evt)=>{
-      if(evt.keyCode === ESC_KEYCODE)getIt(evt)
-    })
-    return ()=>{
-      document.removeEventListener("keydown", (evt)=>{getIt(evt)})
-    }
-  },[]);
+  }*/
 
   function handleCloseClick (evt) {
     evt.preventDefault()
@@ -205,7 +206,7 @@ function App() {
               setCards={setCards}
               cards={cards}
               isImagePopupOpen={isImagePopupOpen}
-              getData={getData}
+              getCards={getCards}
             />
             <Route exact path="/signup">
               <Register setInfoTooltipOpen={setInfoTooltipOpen} setMessage={setMessage}/>
