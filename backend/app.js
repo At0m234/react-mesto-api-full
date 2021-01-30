@@ -66,7 +66,7 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use('/*', (req, res, next) => {
+app.use('/*', (err, req, res, next) => {
   res.send("XUY");
 });
 
@@ -75,7 +75,7 @@ app.use(errorLogger); // подключаем логгер ошибок
 // обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
 
-app.get('/singup', (req, res, next) => {
+/*app.get('/singup', (req, res, next) => {
   res.status(404).send('Something broke!');
   next();
 });
@@ -98,7 +98,7 @@ app.post('*', (req, res, next) => {
 app.all('*', (req, res, next) => {
   res.statusCode(404).send({ message: 'Запрашиваемый ресурс не найден' });
   next();
-});
+});*/
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
