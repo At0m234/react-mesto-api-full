@@ -66,7 +66,7 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use('/*', (err, req, res, next) => {
+app.all('*', (err, req, res, next) => {
   console.log("XUY")
   res.send("XUY");
   res.end("!")
