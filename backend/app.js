@@ -109,7 +109,7 @@ app.all('*', (req, res, next) => {
 });*/
 
 // здесь обрабатываем все ошибки
-app.use((err, req, res, next) => {
+/*app.use((err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500
   const { statusCode = 500, message } = err;
 
@@ -123,7 +123,7 @@ app.use((err, req, res, next) => {
     });
   // вызываем next
   next();
-});
+});*/
 
 app.listen(PORT, () => {
   // Если всё работает, консоль покажет, какой порт приложение слушает
