@@ -12,7 +12,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const users = require('./routes/users');
 // импортируем роутер карточек
 const cards = require('./routes/cards');
-const NotFoundError = require('./errors/not-found-err');
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
 
@@ -72,44 +71,13 @@ app.use((req, res) => {
     .send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
-// app.all('*', (err, req, res, next) => {
-//   console.log("XUY")
-//   res.send("XUY");
-//   res.end("!")
-// });
-
 app.use(errorLogger); // подключаем логгер ошибок
 
 // обработчики ошибок
 app.use(errors()); // обработчик ошибок celebrate
 
-/*app.get('/singup', (req, res, next) => {
-  res.status(404).send('Something broke!');
-  next();
-});
-
-app.get('/singin', (req, res, next) => {
-  res.status(404).send('Something broke!');
-  next();
-});
-
-app.get('/*', (req, res, next) => {
-  res.status(404).send('Something broke!');
-  next();
-});
-
-app.post('*', (req, res, next) => {
-  res.status(404).send('Something broke!');
-  next();
-});
-
-app.all('*', (req, res, next) => {
-  res.statusCode(404).send({ message: 'Запрашиваемый ресурс не найден' });
-  next();
-});*/
-
 // здесь обрабатываем все ошибки
-/*app.use((err, req, res, next) => {
+app.use((err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500
   const { statusCode = 500, message } = err;
 
@@ -123,7 +91,7 @@ app.all('*', (req, res, next) => {
     });
   // вызываем next
   next();
-});*/
+});
 
 app.listen(PORT, () => {
   // Если всё работает, консоль покажет, какой порт приложение слушает
