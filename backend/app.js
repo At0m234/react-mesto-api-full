@@ -51,9 +51,9 @@ app.post('/signup', celebrate({
   }).unknown(true),
 }), createUser);
 
-// app.get('/singup', () => {
-//   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
-// });
+app.get('/singup', () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
+});
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -62,13 +62,17 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-// app.get('/singin', () => {
-//   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
-// });
+app.get('/singin', () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
+});
 
-// app.get('/*', () => {
-//   throw new NotFoundError('Произошла ошибка, не удалось создать карточку');
-// });
+app.get('/*', () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
+});
+
+app.post('/*', () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
+});
 
 // авторизация
 app.use(auth);
