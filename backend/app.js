@@ -66,8 +66,7 @@ app.use('/cards', cards);
 app.use('/users', users);
 
 app.all('*', (req, res, next) => {
-  res.status(404).send({ 'message': 'Запрашиваемый ресурс не найден' });
-  next();
+  res.status(404).send({ "message": "Запрашиваемый ресурс не найден" });
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
