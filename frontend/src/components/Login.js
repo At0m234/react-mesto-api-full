@@ -27,7 +27,6 @@ export const Login = (props) => {
         props.setMessage('Что-то пошло не так! Попробуйте ещё раз.')
         return 
       }
-        console.log("XYQ")
         props.setUserLocalData({'email':username,'password': password})
         localStorage.setItem('userLocalData', JSON.stringify({'email':username,'password': password}))
         props.setMyApi(new Api({'url':BASE_URL, 'token':data.jwt}))

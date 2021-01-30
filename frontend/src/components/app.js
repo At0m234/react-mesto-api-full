@@ -76,18 +76,6 @@ function App() {
         })
     }
   }
-
-  function handleUpdateUser(obj) {
-    const newInfo = currentUser
-    newInfo.name = obj.name
-    newInfo.about = obj.profession
-    myApi.editUserInfo(newInfo)
-      .then(res=> {
-        setCurrentUser(newInfo);
-        closeAllPopups()
-      })
-      .catch(e=>{console.log(e)})
-  }
   
   function handleDeleteClick(card){
     myApi.getCards()
@@ -113,17 +101,6 @@ function App() {
         .catch(err => console.log(err));
     closeAllPopups();
     })
-  }
-
-  function handleUpdateAvatar(url) {
-    const newInfo = currentUser
-    newInfo.avatar = url
-    myApi.changeUserAvatar(url)
-      .then(res=> {
-        setCurrentUser(newInfo);
-        closeAllPopups()
-      })
-      .catch(e=>{console.log(e)})
   }
 
   useEffect(()=> {
@@ -160,41 +137,10 @@ function App() {
     setIsImagePopupOpen(true)
   }
 
-  function handleEditAvatarClick() {
-    closeAllPopups()
-    setIsEditAvatarPopupOpen(true)
-  }
-
-  function handleEditProfileClick() {
-    closeAllPopups()
-    setIsEditProfilePopupOpen(true)
-  }
-
   function handleAddPlaceClick() {
     closeAllPopups()
     setIsAddPlacePopupOpen(true)
   }
-
-  function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    if (isLiked) {
-      myApi.removeLike(card._id)
-      .then(res=>{
-        card.likes = card.likes.filter(i=>i._id !== currentUser._id)
-        setCards(cards)
-        getData()
-      })
-      .catch(e=>{console.log(e)}); ;
-      } else { 
-        myApi.addLike(card._id)
-        .then(res=>{
-          card.likes.push(currentUser);
-          setCards(cards)
-          getData()
-        })
-        .catch(e=>{console.log(e)}); 
-      }
-    }
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false)
@@ -236,7 +182,7 @@ function App() {
       {closeAllPopups();}
   }
 
-  function closeinfoTooltip(){
+  function closeinfoTooltip() {
     setInfoTooltipOpen(false)
   }
 
@@ -253,8 +199,6 @@ function App() {
               isAddPlacePopupOpen={isAddPlacePopupOpen}
               isSuggestionOpen={isSuggestionOpen}
               onDelete={handleDeleteButton}
-              onEditAvatar={handleEditAvatarClick}
-              onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
               onSelectCard={handleCardClick}
               onSelectCurrentCard={handleCardSetCurrent}
@@ -262,7 +206,6 @@ function App() {
               cards={cards}
               isImagePopupOpen={isImagePopupOpen}
               getData={getData}
-              onCardLike={handleCardLike}
             />
             <Route exact path="/signup">
               <Register setInfoTooltipOpen={setInfoTooltipOpen} setMessage={setMessage}/>
