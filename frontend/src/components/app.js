@@ -163,20 +163,6 @@ function App() {
     setSuggestionOpen(false)
   }
 
-  /*function getData() {
-    myApi.getCards()
-      .then((res)=> {
-        if (res !== null)
-        {setCards(res.cards) }
-      })
-      .catch(err => console.log(err));
-
-    myApi.getUserInfo()
-      .then((res)=>{
-      })
-      .catch(err => console.log(err));
-  }*/
-
   function handleCloseClick (evt) {
     evt.preventDefault()
     if (evt.keyCode === ESC_KEYCODE || evt.target.classList.contains('popup') || evt.target.classList.contains('popup__save') || evt.target.classList.contains('popup__close-icon'))
