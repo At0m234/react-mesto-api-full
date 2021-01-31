@@ -66,7 +66,7 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.all('*', (err, req, res, next) => {
+app.all((err, req, res, next) => {
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
   next();
 });
