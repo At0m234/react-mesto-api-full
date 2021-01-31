@@ -12,7 +12,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const users = require('./routes/users');
 // импортируем роутер карточек
 const cards = require('./routes/cards');
-const { requestWhitelist } = require('express-winston');
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
 
@@ -66,8 +65,10 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use((err, req, res, next) => {
-  res.status(404);
+app.use('*', (err, req, res, next) => {
+  res
+    .status(404)
+    .send({ message: 'Запрашиваемый ресурс не найден' });
   next();
 });
 
@@ -80,17 +81,14 @@ app.use(errors()); // обработчик ошибок celebrate
 app.use((err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500
   const { statusCode = 500, message } = err;
-  if (statusCode === 500){
-    message = "Внутренняя ошибка"
-  }
-  if (statusCode === 404){
-    message = "Ресурс не найденн"
-  }
+
   res
     .status(statusCode)
     .send({
       // проверяем статус и выставляем сообщение в зависимости от него
-     message: message
+      message: statusCode === 500
+        ? 'На сервере произошла ошибка'
+        : message,
     });
   next();
 });
