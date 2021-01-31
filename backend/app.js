@@ -66,7 +66,7 @@ app.use('/cards', cards);
 app.use('/users', users);
 
 app.all('*', (err, req, res, next) => {
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+  res.err.statusCode(404).send({ message: 'Запрашиваемый ресурс не найден' });
   next(err);
 });
 
@@ -77,18 +77,17 @@ app.use(errors()); // обработчик ошибок celebrate
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode = 500, message } = err;
+  // // если у ошибки нет статуса, выставляем 500
+  // const { statusCode = 500, message } = err;
 
-  res
-    .status(statusCode)
+  res.status(err.statusCode)
     .send({
       // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === 500
+      message: err.statusCode === 500
         ? 'На сервере произошла ошибка'
-        : message,
+        : err.message,
     });
-  next();
+  next(err);
 });
 
 app.listen(PORT, () => {
