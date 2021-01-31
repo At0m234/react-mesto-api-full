@@ -24,8 +24,6 @@ export function Card(props) {
         <img className="place__image" onClick={props.onSelectCard} src={props.card.link} alt={props.card.name} />
         <div className="place__info">
           <h2 className="place__name">{props.card.name}</h2>
-          <button className="place__like-icon" type="button" aria-label="Мне нравится"></button>
-          <span className="place__like-counter">{props.card.likes.length}</span>
         </div>
       </div>
     </div>

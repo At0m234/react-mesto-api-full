@@ -18,9 +18,7 @@ import { InfoTooltip } from './InfoTooltip';
 import { BASE_URL } from '../utils/constants';
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false)
   const [selectedCard, setSelectedCard] = useState(null)
   const [isSuggestionOpen, setSuggestionOpen] = useState(false)
@@ -32,6 +30,7 @@ function App() {
   const [message, setMessage] = useState('');
   const [userLocalData, setUserLocalData] = useState({email: "", password: ""});
   const [token, setToken] = useState("")
+  const [isRefreshed, setIsRefreshed] = useState(true)
   const [myApi, setMyApi] = useState(new Api({
     'url': BASE_URL, 'token': ""
   }))
@@ -114,17 +113,19 @@ function App() {
   }
 
   useEffect(()=> {
-    if (localStorage.getItem("isLogged") != null) setLogged(localStorage.getItem("isLogged"))
-    if (localStorage.getItem("CurrentUser") != null){
-      setCurrentUser(JSON.parse(localStorage.getItem("CurrentUser")))
-    } 
-    if (localStorage.getItem("UserData") != null) setUserData(JSON.parse(localStorage.getItem("UserData")))
-    if (localStorage.getItem("userLocalData") != null) setUserLocalData(JSON.parse(localStorage.getItem("userLocalData")))
-    if (localStorage.getItem('jwt') != null) setToken(localStorage.getItem('jwt'))
-    setMyApi(new Api({
-      'url': BASE_URL, 'token': localStorage.getItem('jwt')
-    }))
-    
+    if (isRefreshed)
+    {
+      if (localStorage.getItem("isLogged") != null) setLogged(localStorage.getItem("isLogged") === 'true')
+      if (localStorage.getItem("CurrentUser") != null){
+        setCurrentUser(JSON.parse(localStorage.getItem("CurrentUser")))
+      } 
+      if (localStorage.getItem("UserData") != null) setUserData(JSON.parse(localStorage.getItem("UserData")))
+      if (localStorage.getItem("userLocalData") != null) setUserLocalData(JSON.parse(localStorage.getItem("userLocalData")))
+      if (localStorage.getItem('jwt') != null) setToken(localStorage.getItem('jwt'))
+      if (localStorage.getItem("isLogged") === 'true' && localStorage.getItem('jwt') !== ""){
+            getCards()
+      }
+      setIsRefreshed(false)
       function getIt(evt){
         handleCloseClick(evt)
       }
@@ -134,7 +135,8 @@ function App() {
       return ()=>{
         document.removeEventListener("keydown", (evt)=>{getIt(evt)})
       }
-  },[token])
+    }
+  },)
 
   function handleDeleteButton() {
     closeAllPopups()
@@ -156,9 +158,7 @@ function App() {
   }
 
   function closeAllPopups() {
-    setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
-    setIsEditAvatarPopupOpen(false)
     setIsImagePopupOpen(false)
     setSuggestionOpen(false)
   }
@@ -181,8 +181,6 @@ function App() {
           <Switch>
             <ProtectedRoute exact path="/" component={Main} 
               isLogged={localStorage.getItem("isLogged")}
-              isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-              isEditProfilePopupOpen={isEditProfilePopupOpen} 
               isAddPlacePopupOpen={isAddPlacePopupOpen}
               isSuggestionOpen={isSuggestionOpen}
               onDelete={handleDeleteButton}
