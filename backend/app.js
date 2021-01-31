@@ -65,10 +65,8 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use('*', (err, req, res, next) => {
-  res
-    .status(404)
-    .send({ message: 'Запрашиваемый ресурс не найден' });
+app.use((err, req, res, next) => {
+  res.status(404);
   next();
 });
 
