@@ -68,7 +68,6 @@ app.use('/users', users);
 
 app.use((err, req, res, next) => {
   res.status(404);
-  res.message = "Ресурс не найденнн";
   next();
 });
 
@@ -81,14 +80,17 @@ app.use(errors()); // обработчик ошибок celebrate
 app.use((err, req, res, next) => {
   // если у ошибки нет статуса, выставляем 500
   const { statusCode = 500, message } = err;
-
+  if (statusCode === 500){
+    message = "Внутренняя ошибка"
+  }
+  if (statusCode === 404){
+    message = "Ресурс не найденн"
+  }
   res
     .status(statusCode)
     .send({
       // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
-        : message,
+     message: message
     });
   next();
 });
