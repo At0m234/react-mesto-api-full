@@ -7,7 +7,7 @@ const { celebrate, Joi, errors } = require('celebrate');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
+const NotFoundError = require('./errors/not-found-err');
 // импортируем роутер пользователей
 const users = require('./routes/users');
 // импортируем роутер карточек
@@ -65,10 +65,11 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.all('*', (err, req, res) => {
-  res
-    .status(404)
-    .send({ message: 'Запрашиваемый ресурс не найден' });
+app.use('*', () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
+  // res
+  //   .status(404)
+  //   .send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
