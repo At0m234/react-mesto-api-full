@@ -12,7 +12,6 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const users = require('./routes/users');
 // импортируем роутер карточек
 const cards = require('./routes/cards');
-const NotFoundError = require('./errors/not-found-err');
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
 
@@ -89,7 +88,7 @@ app.use((err, req, res, next) => {
         ? 'На сервере произошла ошибка'
         : message,
     });
-  next(err);
+  next();
 });
 
 app.listen(PORT, () => {
