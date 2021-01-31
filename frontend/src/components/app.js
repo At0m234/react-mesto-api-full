@@ -32,7 +32,7 @@ function App() {
   const [token, setToken] = useState("")
   const [isRefreshed, setIsRefreshed] = useState(true)
   const [myApi, setMyApi] = useState(new Api({
-    'url': BASE_URL, 'token': ""
+    'url': BASE_URL, 'token': localStorage.getItem('jwt')
   }))
   const ESC_KEYCODE = 27;
   const history = useHistory();
