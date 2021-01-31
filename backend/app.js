@@ -57,19 +57,12 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-// авторизация
-app.use(auth);
+app.use('/cards', auth, cards);
 
-// роуты, которым авторизация нужна
-app.use('/cards', cards);
+app.use('/users', auth, users);
 
-app.use('/users', users);
-
-app.use('*', (err, req, res, next) => {
+app.use('/*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
-  // res
-  //   .status(404)
-  //   .send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
@@ -79,16 +72,13 @@ app.use(errors()); // обработчик ошибок celebrate
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode = 500, message } = err;
-
   res
-    .status(statusCode)
+    .status(err.statusCode)
     .send({
       // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === 500
+      message: err.statusCode === 500
         ? 'На сервере произошла ошибка'
-        : message,
+        : err.message,
     });
   next();
 });
