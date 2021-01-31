@@ -4,30 +4,27 @@ const BadRequestError = require('../errors/bad-request-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const User = require('../models/user');
 
-module.exports.getUsers = (req, res, next) => {
-  User.find({})
-    .then((users) => {
-      if (!users) {
-        throw new NotFoundError('Произошла ошибка, не удалось найти пользователей');
-      }
-      res.status(200).send({ users });
-    })
-    .catch((err) => next(err));
-};
+// module.exports.getUsers = (req, res, next) => {
+//   User.find({})
+//     .then((users) => {
+//       if (!users) {
+//         throw new NotFoundError('Произошла ошибка, не удалось найти пользователей');
+//       }
+//       res.status(200).send({ users });
+//     })
+//     .catch((err) => next(err));
+// };
 
 module.exports.getMe = (req, res, next) => {
-  User.findById(req.user._id)
-    .orFail(new NotFoundError('Нет пользователя с таким id!'))
+  User.findById(req.user)
     .then((user) => {
-      res.status(200).send({ data: user });
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        const e = new BadRequestError('C запросом что-то не так!');
-        return next(e);
+      if (!user) {
+        throw new NotFoundError('Неверный id пользователя');
+      } else {
+        res.status(200).send({ user });
       }
-      return next(err);
-    });
+    })
+    .catch(next);
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -37,20 +34,19 @@ module.exports.createUser = (req, res, next) => {
 
   return User.createUserByCredentials(name, about, avatar, email, password)
     // вернём записанные в базу данные
-    .then((user) => res.status(200).send({ data: user }))
-    // данные не записались, вернём ошибку
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        const e = new BadRequestError('Ошибка валидации!');
-        return next(e);
+    .then((user) => {
+      if (!user) {
+        throw new BadRequestError('Произошла ошибка, не удалось создать пользователя');
       }
-      return next(err);
-    });
+      res.status(200).send({ data: user });
+    })
+    // данные не записались, вернём ошибку
+    .catch(next);
 };
 
 module.exports.login = (req, res, next) => {
-  const { email, password } = req.body;
   const { NODE_ENV, JWT_SECRET } = process.env;
+  const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
@@ -68,5 +64,5 @@ module.exports.login = (req, res, next) => {
       res.send({ token });
     })
     // возвращаем ошибку аутентификации
-    .catch((err) => next(err));
+    .catch(next);
 };
