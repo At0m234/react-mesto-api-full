@@ -10,7 +10,7 @@ export const register = (email, password) => {
     body: JSON.stringify({email, password})
   })
   .then((res) => {
-    return res.json()
+    return res
   })
   .catch((err) => {
     console.log(err)

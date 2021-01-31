@@ -6,16 +6,16 @@ export function InfoTooltip(props) {
   let image = fail
   if (props.message !== "Что-то пошло не так! Попробуйте ещё раз.") {
     image = success
-    
   }
 
   if (props.infoTooltipOpen) {
     return (
       <section className="popup popup__infoTooltip popup_opened" onClick={props.closeinfoTooltip}>
-        <div className="popup__container"></div>
-        <button className="popup__close-icon" onClick={props.closeinfoTooltip} type="button" aria-label="Закрыть"></button>
-        <img alt={props.message} src={image}/>
-        <p className="popup__title">Что-то пошло не так! Попробуйте ещё раз.</p>
+        <div className="popup__container">
+          <button className="popup__close-icon" onClick={props.closeinfoTooltip} type="button" aria-label="Закрыть"></button>
+          <img alt={props.message} src={image}/>
+          <p className="popup__title">{props.message}</p>
+        </div>
       </section>
     )} else {
       return ""

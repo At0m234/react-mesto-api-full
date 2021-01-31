@@ -18,8 +18,7 @@ export function Register(props) {
     e.preventDefault()
     cardsAuth.register(email, password)
       .then((res)=> {
-        console.log(res)
-        if (res) {
+        if (res.status !== 400) {
           props.setMessage('Вы успешно зарегистрировались!')
           props.setInfoTooltipOpen(true)
         } else {
