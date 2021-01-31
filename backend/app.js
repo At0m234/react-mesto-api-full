@@ -65,8 +65,8 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-app.use('*', () => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден');
+app.use('*', (err, req, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
   // res
   //   .status(404)
   //   .send({ message: 'Запрашиваемый ресурс не найден' });
