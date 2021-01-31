@@ -79,18 +79,16 @@ app.use(errors()); // обработчик ошибок celebrate
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
-  // если у ошибки нет статуса, выставляем 500
-  const { statusCode, message } = err;
-  if (statusCode === 404) {
+  if (err.statusCode === 404) {
     res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
   }
   res
-    .status(statusCode)
+    .status(err.statusCode)
     .send({
       // проверяем статус и выставляем сообщение в зависимости от него
-      message: statusCode === 500
+      message: err.statusCode === 500
         ? 'На сервере произошла ошибка'
-        : message,
+        : err.message,
     });
   next();
 });
