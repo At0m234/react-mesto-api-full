@@ -12,6 +12,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const users = require('./routes/users');
 // импортируем роутер карточек
 const cards = require('./routes/cards');
+const { requestWhitelist } = require('express-winston');
 // Слушаем 3000 порт
 const { PORT = 3000 } = process.env;
 
@@ -67,6 +68,7 @@ app.use('/users', users);
 
 app.use((err, req, res, next) => {
   res.status(404);
+  res.message = "Ресурс не найденнн";
   next();
 });
 
