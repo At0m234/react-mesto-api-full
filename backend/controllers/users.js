@@ -16,15 +16,18 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getMe = (req, res, next) => {
-  User.findById(req.user)
+  User.findById(req.user._id)
+    .orFail(new NotFoundError('Нет пользователя с таким id!'))
     .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Неверный id пользователя');
-      } else {
-        res.status(200).send({ user });
-      }
+      res.status(200).send({ data: user });
     })
-    .catch((err) => next(err));
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        const e = new BadRequestError('C запросом что-то не так!');
+        return next(e);
+      }
+      return next(err);
+    });
 };
 
 module.exports.createUser = (req, res, next) => {
@@ -34,18 +37,20 @@ module.exports.createUser = (req, res, next) => {
 
   return User.createUserByCredentials(name, about, avatar, email, password)
     // вернём записанные в базу данные
-    .then((user) => {
-      if (!user) {
-        throw new BadRequestError('Произошла ошибка, не удалось создать пользователя');
-      }
-      res.status(200).send({ data: user });
-    })
+    .then((user) => res.status(200).send({ data: user }))
     // данные не записались, вернём ошибку
-    .catch((err) => next(err));
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        const e = new BadRequestError('Ошибка валидации!');
+        return next(e);
+      }
+      return next(err);
+    });
 };
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
+  const { NODE_ENV, JWT_SECRET } = process.env;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
@@ -54,7 +59,11 @@ module.exports.login = (req, res, next) => {
       }
       // аутентификация успешна! пользователь в переменной user
       // создадим токен
-      const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key',
+        { expiresIn: '7d' },
+      );
       // вернём токен
       res.send({ token });
     })

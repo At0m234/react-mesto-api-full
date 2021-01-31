@@ -66,11 +66,11 @@ app.use('/cards', cards);
 
 app.use('/users', users);
 
-// app.use((req, res) => {
-//   res
-//     .status(404)
-//     .send({ message: 'Запрашиваемый ресурс не найден' });
-// });
+app.use((req, res) => {
+  res
+    .status(404)
+    .send({ message: 'Запрашиваемый ресурс не найден' });
+});
 
 app.use(errorLogger); // подключаем логгер ошибок
 
@@ -79,16 +79,16 @@ app.use(errors()); // обработчик ошибок celebrate
 
 // здесь обрабатываем все ошибки
 app.use((err, req, res, next) => {
-  if (err.statusCode === 404) {
-    res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
-  }
+  // если у ошибки нет статуса, выставляем 500
+  const { statusCode = 500, message } = err;
+
   res
-    .status(err.statusCode)
+    .status(statusCode)
     .send({
       // проверяем статус и выставляем сообщение в зависимости от него
-      message: err.statusCode === 500
+      message: statusCode === 500
         ? 'На сервере произошла ошибка'
-        : err.message,
+        : message,
     });
   next();
 });
