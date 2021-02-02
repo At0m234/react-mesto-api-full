@@ -1,7 +1,7 @@
 export class Api {
-  constructor({url, token}) {
+  constructor({url, authorization}) {
     this._url = url;
-    this._token = token;
+    this._token = authorization;
     this._headers =  {
       'authorization': 'Bearer ' + this._token,
       'Content-Type': 'application/json',

@@ -122,6 +122,7 @@ function App() {
       if (localStorage.getItem("UserData") != null) setUserData(JSON.parse(localStorage.getItem("UserData")))
       if (localStorage.getItem("userLocalData") != null) setUserLocalData(JSON.parse(localStorage.getItem("userLocalData")))
       if (localStorage.getItem('jwt') != null) setToken(localStorage.getItem('jwt'))
+      if (localStorage.getItem('apiData') != null) setMyApi(localStorage.getItem('apiData'))
       if (localStorage.getItem("isLogged") === 'true' && localStorage.getItem('jwt') !== ""){
             getCards()
       }
