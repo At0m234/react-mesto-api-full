@@ -3,7 +3,7 @@ export class Api {
     this._url = url;
     this._token = token;
     this._headers =  {
-      'token': 'Bearer ' + this._token,
+      'authorization': 'Bearer ' + this._token,
       'Content-Type': 'application/json',
     }
   }

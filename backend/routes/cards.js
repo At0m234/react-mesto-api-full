@@ -4,16 +4,17 @@ const { celebrate, Joi } = require('celebrate');
 const { getCards, createCard, removeCard } = require('../controllers/cards');
 
 const linkRegExp = /^http[s]{0,1}:\/\/[-._~:\/?#[\]@!$&'()*+,;= 0-=a-zA-Z-]*/;
-const schema = Joi.object({
+
+const createCardSchema = Joi.object({
   name: Joi.string().required().min(2).max(30),
   link: Joi.string()
-    .pattern(new RegExp(linkRegExp)),
+    .pattern(new RegExp(linkRegExp)).required(),
 });
 
 router.get('/', getCards);
 
 router.post('/', celebrate({
-  body: schema,
+  body: createCardSchema,
 }), createCard);
 
 router.delete('/:cardId', celebrate({

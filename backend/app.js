@@ -13,7 +13,7 @@ const users = require('./routes/users');
 // импортируем роутер карточек
 const cards = require('./routes/cards');
 // Слушаем 3000 порт
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 
@@ -57,12 +57,12 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-app.use('/cards', cards, auth);
+app.use('/cards', auth, cards);
 
-app.use('/users', users, auth);
+app.use('/users', auth, users);
 
-app.use('/*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+app.all('*', () => {
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
 app.use(errorLogger); // подключаем логгер ошибок
