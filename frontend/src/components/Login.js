@@ -23,14 +23,13 @@ export const Login = (props) => {
     cardsAuth.authorize(username, password)
     .then((data) => {
       if(!data) {
-        
         props.setMessage('Что-то пошло не так! Попробуйте ещё раз.')
         return 
       }
         props.setUserLocalData({'email':username,'password': password})
         localStorage.setItem('userLocalData', JSON.stringify({'email':username,'password': password}))
-        props.setMyApi(new Api({'url':BASE_URL, 'token':data.jwt}))
-        localStorage.setItem('apiData', JSON.stringify({'url':BASE_URL, 'token':data.jwt}))
+        props.setMyApi(new Api({'url':BASE_URL, 'authorization':data.jwt}))
+        localStorage.setItem('apiData', JSON.stringify({'url':BASE_URL, 'authorization':data.jwt}))
         localStorage.setItem('jwt', data.jwt)
         props.tokenCheck()
     })

@@ -52,7 +52,7 @@ function App() {
   function handleSignOut() {
     localStorage.clear()
     setMyApi(new Api({
-      'url': BASE_URL, 'token': ""
+      'url': BASE_URL, 'authorization': ""
     }))
     setCurrentUser({ 'name':'', 'profession':'', '_id': '' ,'avatar': ""})
     setUserLocalData({email: "", password: ""})
