@@ -12,7 +12,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: { // опишем свойство validate
       validator(v) { // validator - функция проверки данных. v - значение свойства
-        const regex = /^http[s]{0,1}:\/\/[-._~:/?#[\]@!$&'()*+,;= 0-=a-zA-Z-]*/gm;
+        const regex = /^http[s]{0,1}:\/\/[-._~:\/?#[\]@!$&'()*+,;= 0-=a-zA-Z-]*/gm;
         return v.match(regex);
       },
       message: 'Ссылка не соответсвует требованиям валидации', // когда validator вернёт false, будет использовано это сообщение
