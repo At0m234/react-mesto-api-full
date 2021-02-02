@@ -27,7 +27,7 @@ export function Main (props) {
               onSelectCurrentCard={props.onSelectCurrentCard}
               card={card}
               onCardLike = {props.onCardLike}
-              onCardDelete = {props.onDelete}
+              onDelete = {props.onDelete}
               />
             ))
           }

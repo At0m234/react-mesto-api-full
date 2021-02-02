@@ -87,15 +87,16 @@ function App() {
   }
   
   function handleDeleteClick(card){
-    myApi.getCards()
-      .then((res)=> {
+    myApi.getCards().then((res)=> {
         if (res)
-        setCards(res.cards)
-        const isOwner = card.owner[0] === currentUser._id;
-        if (isOwner) {
-          myApi.removeCard(card._id);
-          setCards(cards.filter(i=>i._id !== card._id))
-        };
+        {
+          setCards(res.cards)
+          const isOwner = card.owner[0] === currentUser._id;
+          if (isOwner) {
+            myApi.removeCard(card._id);
+            setCards(cards.filter(i=>i._id !== card._id))
+          };
+        }
       })
       .catch(err => console.log(err));
   }
@@ -122,7 +123,7 @@ function App() {
       if (localStorage.getItem("UserData") != null) setUserData(JSON.parse(localStorage.getItem("UserData")))
       if (localStorage.getItem("userLocalData") != null) setUserLocalData(JSON.parse(localStorage.getItem("userLocalData")))
       if (localStorage.getItem('jwt') != null) setToken(localStorage.getItem('jwt'))
-      if (localStorage.getItem('apiData') != null) setMyApi(JSON.parse(localStorage.getItem('apiData')))
+      if (localStorage.getItem('apiData') != null) setMyApi(new Api(JSON.parse(localStorage.getItem('apiData'))))
       if (localStorage.getItem("isLogged") === 'true' && localStorage.getItem('jwt') !== ""){
             getCards()
       }

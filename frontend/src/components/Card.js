@@ -9,7 +9,7 @@ export function Card(props) {
   }
 
   function handleDeleteClick(){
-    props.onCardDelete()
+    props.onDelete()
   }
 
   // Создаём переменную, которую после зададим в `className` для кнопки удаления
