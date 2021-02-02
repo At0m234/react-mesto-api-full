@@ -10,11 +10,11 @@ export function InfoTooltip(props) {
 
   if (props.infoTooltipOpen) {
     return (
-      <section className="popup popup__infoTooltip popup_opened" onClick={props.closeinfoTooltip}>
-        <div className="popup__container">
+      <section className="popup popup_opened" onClick={props.closeinfoTooltip}>
+        <div className="popup__container  popup__infoTooltip">
           <button className="popup__close-icon" onClick={props.closeinfoTooltip} type="button" aria-label="Закрыть"></button>
-          <img alt={props.message} src={image}/>
-          <p className="popup__title">{props.message}</p>
+          <img className="popup__infoTooltip_image" alt={props.message} src={image}/>
+          <p className="popup__infoTooltip_title">{props.message}</p>
         </div>
       </section>
     )} else {

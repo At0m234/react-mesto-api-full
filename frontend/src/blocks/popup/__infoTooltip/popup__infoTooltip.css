@@ -1,3 +1,6 @@
+@import url(./_title/popup__infoTooltip_title.css);
+@import url(./_image/popup__infoTooltip_image.css);
+
 .popup__infoTooltip {
   width: 430px;
   height: 330px;

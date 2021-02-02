@@ -1,0 +1,9 @@
+.popup__infoTooltip_title {
+  width: 80%;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  color: #000;
+  text-align: center;
+  margin: 32px auto 60px auto;
+}
