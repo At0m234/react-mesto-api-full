@@ -16,11 +16,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "rimraf build && react-scripts build",
-    "bas": "npm run build && npm run start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && scp -r build/* atom@178.154.254.80:/home/atom/react-mesto-api-full/news-frontend",
-    "deploygh": "gh-pages -d build"
+    "deploygh": "rimraf build && react-scripts build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
