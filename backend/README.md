@@ -1,5 +1,4 @@
-# __Mesto Russia (backend)__ 
-
+# __Yandex.Practicum. Web Development training course. Project works No. 13-15: Mesto Russia (Backend)__ 
 ## __[Application Frontend here](https://github.com/At0m234/react-mesto-app/tree/main/frontend)__
 
 ## __[GitHub Pages (Frontend)](https://at0m234.github.io/react-mesto-app/)__
