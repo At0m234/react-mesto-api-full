@@ -1,5 +1,5 @@
-@import url(_name/popup__text_name.css);
-@import url(_profession/popup__text_profession.css);
+@import url('./_name/popup__text_name.css');
+@import url('./_profession/popup__text_profession.css');
 
 .popup__text {
   width: 83%;

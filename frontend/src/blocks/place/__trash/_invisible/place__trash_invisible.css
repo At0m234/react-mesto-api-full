@@ -1,3 +1,4 @@
 .place__trash_invisible {
   visibility: hidden;
+  display: none;
 }

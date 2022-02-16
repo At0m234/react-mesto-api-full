@@ -1,9 +1,9 @@
-@import url(__title/entry__title.css);
-@import url(__email/entry__email.css);
-@import url(__password/entry__password.css);
-@import url(__submit/entry__submit.css);
-@import url(__sign-in/entry__sign-in.css);
-@import url(__link/entry__link.css);
+@import url('./__title/entry__title.css');
+@import url('./__email/entry__email.css');
+@import url('./__password/entry__password.css');
+@import url('./__submit/entry__submit.css');
+@import url('./__sign-in/entry__sign-in.css');
+@import url('./__link/entry__link.css');
 
 .entry {
   display: flex;

@@ -1,5 +1,5 @@
 .place__trash {
-  background-image: url(../../../../src/images/trash.svg);
+  background-image: url('../../../../src/images/trash.svg');
   position: absolute;
   top: 18px;
   right: 15px;

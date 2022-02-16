@@ -1,14 +1,14 @@
-@import url(__container/popup__container.css);
-@import url(__text/popup__text.css);
-@import url(__text/_avatar/popup__text_avatar.css);
-@import url(__save/popup__save.css);
-@import url(__title/popup__title.css);
-@import url(__close-icon/popup__close-icon.css);
-@import url(__img-container/popup__img-container.css);
-@import url(__big-img/popup__big-img.css);
-@import url(__caption/popup__caption.css);
-@import url(__input/popup__input.css);
-@import url(__infoTooltip/popup__infoTooltip.css);
+@import url('./__container/popup__container.css');
+@import url('./__text/popup__text.css');
+@import url('./__text/_avatar/popup__text_avatar.css');
+@import url('./__save/popup__save.css');
+@import url('./__title/popup__title.css');
+@import url('./__close-icon/popup__close-icon.css');
+@import url('./__img-container/popup__img-container.css');
+@import url('./__big-img/popup__big-img.css');
+@import url('./__caption/popup__caption.css');
+@import url('./__input/popup__input.css');
+@import url('./__infoTooltip/popup__infoTooltip.css');
 
 .popup {
   display: flex;
@@ -29,5 +29,5 @@
   z-index: 2;
   visibility: hidden;
   opacity: 0;
-  transition: all .05s, linear .05s;
+  transition: opacity 1s, linear 1s;
 }

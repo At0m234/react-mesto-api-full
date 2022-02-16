@@ -1,7 +1,7 @@
-@import url(__logo/header__logo.css);
-@import url(__signout/header__signout.css);
-@import url(__username/header__username.css);
-@import url(__btn/header__btn.css);
+@import url('./__logo/header__logo.css');
+@import url('./__signout/header__signout.css');
+@import url('./__username/header__username.css');
+@import url('./__btn/header__btn.css');
 
 .header {
   max-width: 882px;

@@ -1,4 +1,4 @@
-@import url(_img/popup__close-icon_img.css);
+@import url('./_img/popup__close-icon_img.css');
 
 .popup__close-icon {
   width: 45px;
@@ -8,7 +8,7 @@
   z-index: 1;
   transform: translate(224px, -32px);
   position: absolute;
-  background-image: url(../../../images/close-icon.svg);
+  background-image: url('../../../images/close-icon.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }

@@ -1,5 +1,5 @@
 .place__like-icon_filled {
-  background-image: url(../../../../images/Vector.svg);
+  background-image: url('../../../../images/Vector.svg');
 }
 
 .place__like-icon_filled:hover {
