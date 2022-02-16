@@ -2,18 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import '../index.css';
-import { Header } from "./Header"
-import { Main } from "./Main.js"
-import { Footer } from "./Footer.js"
+import { Header } from "./Header";
+import { Main } from "./Main.js";
+import { Footer } from "./Footer.js";
 import { Api } from '../utils/Api';
-import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
-import { ImagePopup } from "./ImagePopup"
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import { ImagePopup } from "./ImagePopup";
 import { AddPlacePopup } from './AddPlacePopup';
-import { SuggestionPopup } from './SuggestionPopup'
+import { SuggestionPopup } from './SuggestionPopup';
 import ProtectedRoute from './ProtectedRoute'; 
 import { Login } from "./Login";
 import { Register } from "./Register";
-import * as cardsAuth from '../utils/cardsAuth.js'
+import * as cardsAuth from '../utils/cardsAuth.js';
 import { InfoTooltip } from './InfoTooltip';
 import { BASE_URL } from '../utils/constants';
 

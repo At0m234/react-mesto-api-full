@@ -12,8 +12,8 @@ const NotFoundError = require('./errors/not-found-err');
 const users = require('./routes/users');
 // импортируем роутер карточек
 const cards = require('./routes/cards');
-// Слушаем 3000 порт
-const { PORT = 3000 } = process.env;
+// Слушаем 4000 порт
+const { PORT = 4000 } = process.env;
 
 const app = express();
 

@@ -1,6 +1,10 @@
-# react-mesto-api-full
-Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. Бэкенд расположите в директории `backend/`, а фронтенд - в `frontend/`. 
-  
-Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
-[Ссылка на сайт](http://pic.students.nomoredomains.icu/)
-Публичный IPv4 178.154.254.80
+# __Yandex.Practicum. Web Development training course. Project works No. 10-15: Mesto Russia React (Frontend+Backend)__
+
+## __Overview__
+
+Repository for the "Mesto Russia" application, which includes:
+- [Frontend](https://github.com/At0m234/react-mesto-app/tree/main/frontend) is placed in `frontend/` directory;
+- [Backend](https://github.com/At0m234/react-mesto-app/tree/main/backend) is placed in `backend/` directory;
+
+<!-- [The Site on Yandex.Cloud](http://pic.students.nomoredomains.icu/) -->
+<!-- Public IPv4 178.154.254.80 -->

@@ -21,21 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-{
-    "data": {
-        "_id": "5ffd8aad86203500127e1f0b",
-        "email": "V.O.Ilin@yandex.ru"
-    }
-}
-
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmZkOGFhZDg2MjAzNTAwMTI3ZTFmMGIiLCJpYXQiOjE2MTA0NTE2ODh9.GXTqw8cpgM2xBwRDsZ19IGNLqCMmmLdtE_zqQAlbyFQ"
-}
-
-{
-    "data": {
-        "_id": "5ffd8aad86203500127e1f0b",
-        "email": "V.O.Ilin@yandex.ru"
-    }
-}
