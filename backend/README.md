@@ -1,16 +1,65 @@
-# Проект Mesto бэкенд
+# __Mesto Russia (backend)__ 
 
-## Директории
+## __[Application Frontend here](https://github.com/At0m234/react-mesto-app/tree/main/frontend)__
 
-`/models` — папка с моделями(схемами) пользователя и карточки
-`/controllers` — папка с контроллерами пользователей и карточек
-`/routes` — папка с файлами роутера  
-`/middlewares` — папка с мидлвэрами авторизации и логирования запросов 
-`/errors` — папка с классами ошибок запросов
+## __[GitHub Pages (Frontend)](https://at0m234.github.io/react-mesto-app/)__
+## __Functionality__
+Mesto Russia (backend) - backand of adaptive single page application. 
+Server allows you:
+ - register (hash password);
+ - login;
+ - return users info and cards;
+ - add and remove your own cards.
 
-Остальные директории вспомогательные, создаются при необходимости разработчиком
+## __Available Scripts__
 
-## Запуск проекта
+### __`npm run start`__ 
+starts the server on PORT = 4000;
+### __`npm run dev`__ 
+starts the server in development mode with hot-reload on PORT = 4000;
 
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+## __Requests__
+
+### `POST http://localhost:4000/signup`
+Registration;
+
+### `POST http://localhost:4000/signin`
+Login;
+
+### `GET http://localhost:4000/`
+Returns all users and cards;
+
+### `GET http://localhost:4000/me`
+Returns user`s name, profession and avatar; 
+
+### `POST http://localhost:4000/`
+Creates user`s card; 
+
+### `DELETE http://localhost:4000/:cardId`
+Removes user`s card; 
+
+## __Directories__
+
+### `/controllers` 
+folder with units and cards request controllers; 
+### `/errors` 
+folder with request error classes;
+### `/middlewares` 
+folder with middleware authorization and logging requests; 
+### `/models` 
+folder with schemas of the user and the card; 
+### `/routes` 
+folder with request routes.
+
+## __Stack__
+
+### `Node.js`
+
+### `Express`
+
+### `Mongoose`
+
+### `MongoDB`
+
+### `Celebrate`
+### `Logger`

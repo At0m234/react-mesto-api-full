@@ -39,7 +39,7 @@ const userSchema = mongoose.Schema({
     validate: {
       validator(v) {
         // const emailRegex = /^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-        return validator.isEmail(v); 
+        return validator.isEmail(v);
       },
       message: 'Почта не соответсвует требуемому формату',
     },

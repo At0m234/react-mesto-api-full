@@ -4,29 +4,6 @@ const BadRequestError = require('../errors/bad-request-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const User = require('../models/user');
 
-module.exports.getUsers = (req, res, next) => {
-  User.find({})
-    .then((users) => {
-      if (!users) {
-        throw new NotFoundError('Произошла ошибка, не удалось найти пользователей');
-      }
-      res.status(200).send({ users });
-    })
-    .catch((err) => next(err));
-};
-
-module.exports.getMe = (req, res, next) => {
-  User.findById(req.user)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Неверный id пользователя');
-      } else {
-        res.status(200).send({ user });
-      }
-    })
-    .catch(next);
-};
-
 module.exports.createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
@@ -64,5 +41,28 @@ module.exports.login = (req, res, next) => {
       res.send({ token });
     })
     // возвращаем ошибку аутентификации
+    .catch(next);
+};
+
+module.exports.getUsers = (req, res, next) => {
+  User.find({})
+    .then((users) => {
+      if (!users) {
+        throw new NotFoundError('Произошла ошибка, не удалось найти пользователей');
+      }
+      res.status(200).send({ users });
+    })
+    .catch((err) => next(err));
+};
+
+module.exports.getMe = (req, res, next) => {
+  User.findById(req.user)
+    .then((user) => {
+      if (!user) {
+        throw new NotFoundError('Неверный id пользователя');
+      } else {
+        res.status(200).send({ user });
+      }
+    })
     .catch(next);
 };
